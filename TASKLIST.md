@@ -32,7 +32,6 @@ fn puntuacio(){
             if map[x][y] == Tile::BLUE {
                 Puntacio[3]+=1
               }
-            #other logic
             }
         }
     Puntacio
