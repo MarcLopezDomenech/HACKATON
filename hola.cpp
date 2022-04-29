@@ -1,10 +1,9 @@
 #include <iostream>
 using namespace std;
 
-int main()
-{
-    int a;
-    cin >> a;
+int main() {
+  int a;
+  cin >> a;
 
-    cout << "I'm 2 done" << endl;
+  cout << "I'm 08979 done" << endl;
 }
