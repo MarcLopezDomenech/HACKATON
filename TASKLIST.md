@@ -11,3 +11,4 @@
 ## Probelmas
 - [ ] Cuantos puntos de media serían necesarios para ganar
 - [ ] Como es la mejor manera de interconectar conjuntos
+- [ ] En que posición queremos que esten nuestras fichas de "normal"
