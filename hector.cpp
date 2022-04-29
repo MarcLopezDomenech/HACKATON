@@ -1,11 +1,47 @@
-"""Estratègia de prova"""
+""
+    "Estratègia de prova"
+    ""
 
-
-for w in map.workers
+    fn
+    puntuacio()
 {
-    // Logic to check worker placement
+    let Puntuacio=[0,0,0,0]
+    for x in 0..40
+    {
+        for
+            y in 0..40
+            {
+                if map
+                    [x][y] == Tile::GREEN
+                    {
+                        Puntacio[0] += 1;
+                    }
+                if map
+                    [x][y] == Tile::YELLOW
+                    {
+                        Puntacio[1] += 1;
+                    }
+                if map
+                    [x][y] == Tile::RED
+                    {
+                        Puntacio[2] += 1;
+                    }
+                if map
+                    [x][y] == Tile::BLUE
+                    {
+                        Puntacio[3] += 1;
+                    }
+#other logic
+            }
+    }
+    Puntacio
 }
-
+for
+    w in map.workers
+    {
+        // Logic to check worker placement
+    }
+info(puntuacio);
 for
     x in 0..40
     {
@@ -20,7 +56,6 @@ for
             // other logic
         }
     }
-info("xd");
 for
     w in 0..8
     {
