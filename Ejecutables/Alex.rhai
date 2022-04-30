@@ -63,7 +63,7 @@ fn direction(map,z,d,work_a,position){
         //info(`it moves ${0}`);
         return 0
       }
-    } 
+    }
     //Tercer quadrant
     if j+1==2 && should_move(map,x-d+i,y-i,our_color,work_a,position) {
       if map[x-d+i][y-i] == Tile::EMPTY {
@@ -83,7 +83,7 @@ fn direction(map,z,d,work_a,position){
   return direction(map,z,d+1,work_a,position)
 }
 
-//----------------------------------------------
+//-------------------------------------------------------------------------
 
 if "tick" in memory == false {
         memory.tick = 0;
