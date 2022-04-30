@@ -8,53 +8,53 @@ fn direction(map,w,d){
   let y=w.y;
   for i in 0..d{
     //Primer quadrant
-    if not_found_yet && x+d-i<40 && y+i<40 && map[x+d-i][y+i] != Tile::our_color && map[x+d-i][y+i] != Tile::EMPTY{
+    if not_found_yet && x+d-i<40 && y+i<40 && map[x+d-i][y+i] != our_color && map[x+d-i][y+i] != Tile::EMPTY{
       not_found_yet=false;
       2
     }
     //Quart quadrant
-    if not_found_yet && x+d-i<39 && y-i>-1 && map[x+d-i][y-i] != Tile::our_color && map[x+d-i][y-i] != Tile::EMPTY{
+    if not_found_yet && x+d-i<39 && y-i>-1 && map[x+d-i][y-i] != our_color && map[x+d-i][y-i] != Tile::EMPTY{
       not_found_yet=false;
       2
     }
     //Segon quadrant
-    if not_found_yet && x-d+i>-1 && y+i<40 && map[x-d+i][y+i] != Tile::our_color && map[x-d+i][y+i] != Tile::EMPTY{
+    if not_found_yet && x-d+i>-1 && y+i<40 && map[x-d+i][y+i] != our_color && map[x-d+i][y+i] != Tile::EMPTY{
       not_found_yet=false;
       3
     }
     //Tercer quadrant
-    if not_found_yet && x-d+i>-1 && y-i>-1 && map[x-d+i][y-i] != Tile::our_color && map[x-d+i][y-i] != Tile::EMPTY{
+    if not_found_yet && x-d+i>-1 && y-i>-1 && map[x-d+i][y-i] != our_color && map[x-d+i][y-i] != Tile::EMPTY{
       not_found_yet=false;
       3
     }
   }
   for i in 0..d{
     //Primer quadrant
-    if not_found_yet && x+d-i<40 && y+i<40 && map[x+d-i][y+i] != Tile::our_color {
+    if not_found_yet && x+d-i<40 && y+i<40 && map[x+d-i][y+i] != our_color {
       not_found_yet=false;
       2
     }
     //Quart quadrant
-    if not_found_yet && x+d-i<39 && y-i>-1 && map[x+d-i][y-i] != Tile::our_color {
+    if not_found_yet && x+d-i<39 && y-i>-1 && map[x+d-i][y-i] != our_color {
       not_found_yet=false;
       2
     }
     //Segon quadrant
-    if not_found_yet && x-d+i>-1 && y+i<40 && map[x-d+i][y+i] != Tile::our_color {
+    if not_found_yet && x-d+i>-1 && y+i<40 && map[x-d+i][y+i] != our_color {
       not_found_yet=false;
       3
     }
     //Tercer quadrant
-    if not_found_yet && x-d+i>-1 && y-i>-1 && map[x-d+i][y-i] != Tile::our_color {
+    if not_found_yet && x-d+i>-1 && y-i>-1 && map[x-d+i][y-i] != our_color {
       not_found_yet=false;
       3
     }
   }
-  if not_found_yet && y+d<40 && map[x][y+d] != Tile::our_color && map[x][y+d] != Tile::EMPTY{
+  if not_found_yet && y+d<40 && map[x][y+d] != our_color && map[x][y+d] != Tile::EMPTY{
     not_found_yet=false;
     0
   }
-  if not_found_yet && y-d>-1 && map[x][y-d] != Tile::our_color && map[x][y-d] != Tile::EMPTY{
+  if not_found_yet && y-d>-1 && map[x][y-d] != our_color && map[x][y-d] != Tile::EMPTY{
     not_found_yet=false;
     1
   }
