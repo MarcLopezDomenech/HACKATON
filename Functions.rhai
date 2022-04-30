@@ -30,3 +30,47 @@ fn can_move(x,y){
   }
   true
 }
+
+//Retorna si en la posició (x,y) es enemiga
+fn casilla_enemiga(x,y){
+  if map[x][y]!=Tile::EMPTY && map[x][y]!=map.mycolor(){
+      return true;
+  }
+  return false;
+}
+
+//Retorna si en la posició (x,y) es buida
+fn casilla_buida(x,y){
+  if map[x][y]==Tile::EMPTY{
+      return true;
+  }
+  return false;
+}
+
+//Retorna si en la posició (x,y) hi ha un worker
+fn can_move(x,y,work_arr){
+  for w in work_arr{
+    if w.x==x && w.y==y{
+      false
+    }
+  }
+  true
+}
+
+//Modifica la posició del worker a la posició (x,y) en la direcció (d)
+fn move(x,y,work_a,d){
+  for w in map.work_a{
+    if w.x==x && w.y==y{
+      false
+    }
+  }
+  true
+}
+
+//Da si(x,y) es una posición valida
+fn valid_pos(x,y){
+  if x<40 && x>=0 & y>=0 && y<40{
+    true
+  }
+  false
+}

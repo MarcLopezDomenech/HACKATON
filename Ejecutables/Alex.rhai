@@ -1,7 +1,7 @@
 //Retorna si en la posició (x,y) hi ha un worker
 fn can_move(x,y,work_arr){
   for w in work_arr{
-    if work_arr.x==x && work_arr.y==y{
+    if w.x==x && w.y==y{
       false
     }
   }
@@ -69,7 +69,7 @@ fn direction(map,w,d,work_a){
     1
   }
   if not_found_yet{
-    direction(map,w,d+1)
+    direction(map,w,d+1,work_a)
   }
 }
 
