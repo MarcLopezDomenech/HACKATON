@@ -23,18 +23,20 @@ fn should_move(map,x,y,our_color,work_ar,position){
 //donada una distancia d i un worker w, calcula el punt a distancia d que no sigui del nostre color,
 //prioritzant si és d'un altre color. Retorna un enter entre 0 i 3 que significa:
 //[0,1,2,3]=[up,down,right,left]
-fn direction(map,w,d,work_a,position){
+fn direction(map,z,d,work_a,position){
   if d==40{
     info(`function fails`);
     return 1
   }
+  let w=worker(z);
   let our_color=w.color;
   let result=4;
   let x=w.x;
   let y=w.y;
-  for i in 0..d{
+  for j in 0..2{
+    for i in 0..d{
     //Primer quadrant
-    if should_move(map,x+d-i,y+i,our_color,work_a,position) {
+    if j==0 && should_move(map,x+d-i,y+i,our_color,work_a,position) {
       if map[x+d-i][y+i] == Tile::EMPTY {
         result=2;
       } else {
@@ -43,7 +45,7 @@ fn direction(map,w,d,work_a,position){
       }
     }
     //Quart quadrant
-    if should_move(map,x+d-i-1,y-i-1,our_color,work_a,position) {
+    if j==(z%2).abs() && should_move(map,x+d-i-1,y-i-1,our_color,work_a,position) {
       if map[x+d-i-1][y-i-1] == Tile::EMPTY {
         result=1;
       } else {
@@ -52,7 +54,7 @@ fn direction(map,w,d,work_a,position){
       }
     }
     //Segon quadrant
-    if should_move(map,x-d+i+1,y+i+1,our_color,work_a,position) {
+    if j+1==(z%2).abs() && should_move(map,x-d+i+1,y+i+1,our_color,work_a,position) {
       if map[x-d+i+1][y+i+1] == Tile::EMPTY {
         result=0;
       } else {
@@ -61,7 +63,7 @@ fn direction(map,w,d,work_a,position){
       }
     }
     //Tercer quadrant
-    if should_move(map,x-d+i,y-i,our_color,work_a,position) {
+    if j==1 && should_move(map,x-d+i,y-i,our_color,work_a,position) {
       if map[x-d+i][y-i] == Tile::EMPTY {
         result=3;
       } else {
@@ -69,19 +71,21 @@ fn direction(map,w,d,work_a,position){
         return 3
       }
     }
+    }
+
   }
   if result<4{
     //info(`it moves ${result}`);
     return result
   }
-  return direction(map,w,d+1,work_a,position)
+  return direction(map,z,d+1,work_a,position)
 }
 
 let position=[];
 position.pad(8,0);
 for w in 0..8 {
   let work_ar=map.workers;
-  let dir=direction(map,worker(w),1,work_ar,position);
+  let dir=direction(map,w,1,work_ar,position);
     if dir==0 {
       info(`worker ${w} moves to [${worker(w).x},${worker(w).y+1}]`);
       position[w]=1;
