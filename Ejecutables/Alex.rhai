@@ -50,11 +50,11 @@ fn direction(map,w,d){
       3
     }
   }
-  if not_found_yet && y+d<40 && map[x][y+d] != Tile::our_color $$ map[x][y+d] != Tile::EMPTY{
+  if not_found_yet && y+d<40 && map[x][y+d] != Tile::our_color && map[x][y+d] != Tile::EMPTY{
     not_found_yet=false;
     0
   }
-  if not_found_yet && y-d>-1 && map[x][y-d] != Tile::our_color $$ map[x][y-d] != Tile::EMPTY{
+  if not_found_yet && y-d>-1 && map[x][y-d] != Tile::our_color && map[x][y-d] != Tile::EMPTY{
     not_found_yet=false;
     1
   }
