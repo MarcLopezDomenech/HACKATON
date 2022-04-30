@@ -1,6 +1,6 @@
 //Retorna si en la posició (x,y) hi ha un worker
 fn can_move(x,y,work_ar,place){
-  for i in place{
+  for i in place {
     if i==40*x+y{
       return false
     }
@@ -75,30 +75,30 @@ fn direction(map,w,d,work_a,place){
   direction(map,w,d+1,work_a,place)
 }
 
-  for w in 0..8 {
-    let place = [];
-    let work_ar=map.workers;
-    let dir=direction(map,worker(w),1,work_ar, place);
-      if dir==0 {
-        info(`worker ${w} moves to [${worker(w).x},${worker(w).y+1}]`);
-        place.pad(1,40*worker(w).x+worker(w).y+1);
-        worker(w).move_up();
-      }
-      else if dir==1 {
-        info(`worker ${w} moves to [${worker(w).x},${worker(w).y-1}]`);
-        place.pad(1,40*worker(w).x+worker(w).y-1);
-        worker(w).move_down();
-      }
-      else if dir==2 {
-        info(`worker ${w} moves to [${worker(w).x+1},${worker(w).y}]`);
-        place.pad(1,40*worker(w).x+worker(w).y+40);
-        worker(w).move_right();
-      }
-      else if dir==3 {
-        info(`worker ${w} moves to [${worker(w).x-1},${worker(w).y}]`);
-        place.pad(1,40*worker(w).x+worker(w).y-40);
-        worker(w).move_left();
-      } else {
-      info(`${w} fails `);
-      }
+let memory.place = [];
+for w in 0..8 {
+  let work_ar=map.workers;
+  let dir=direction(map,worker(w),1,work_ar, place);
+    if dir==0 {
+      info(`worker ${w} moves to [${worker(w).x},${worker(w).y+1}]`);
+      place.pad(1,40*worker(w).x+worker(w).y+1);
+      worker(w).move_up();
     }
+    else if dir==1 {
+      info(`worker ${w} moves to [${worker(w).x},${worker(w).y-1}]`);
+      place.pad(1,40*worker(w).x+worker(w).y-1);
+      worker(w).move_down();
+    }
+    else if dir==2 {
+      info(`worker ${w} moves to [${worker(w).x+1},${worker(w).y}]`);
+      place.pad(1,40*worker(w).x+worker(w).y+40);
+      worker(w).move_right();
+    }
+    else if dir==3 {
+      info(`worker ${w} moves to [${worker(w).x-1},${worker(w).y}]`);
+      place.pad(1,40*worker(w).x+worker(w).y-40);
+      worker(w).move_left();
+    } else {
+    info(`${w} fails `);
+    }
+  }
