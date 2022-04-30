@@ -77,9 +77,9 @@ fn direction(map,w,d,work_a,position){
   return direction(map,w,d+1,work_a,position)
 }
 
+let position=[];
+position.pad(8,0);
 for w in 0..8 {
-  let position=[];
-  position.pad(8,0);
   let work_ar=map.workers;
   let dir=direction(map,worker(w),1,work_ar,position);
     if dir==0 {
@@ -104,5 +104,4 @@ for w in 0..8 {
     } else {
     info(`${w} fails `);
     }
-    //info(`MOVES ${w}, position 4th worker: [${worker(4).x},${worker(4).y}]`)
-  }
+}
