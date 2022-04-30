@@ -4,16 +4,16 @@ fn puntuacio(){
         for y in 0..40 {
             if map[x][y] == Tile::GREEN {
                 Puntacio[0]+=1;
-              }
+            }
             else if map[x][y] == Tile::YELLOW {
                 Puntacio[1]+=1;
-              }
+            }
             else if map[x][y] == Tile::RED {
                 Puntacio[2]+=1;
-              }
+            }
             else if map[x][y] == Tile::BLUE {
                 Puntacio[3]+=1;
-              }
+            }
             }
         }
     Puntacio
@@ -29,7 +29,7 @@ fn max(a,b,c,d){
   } else {
     3
   }
-}
+};
 
 for w in 0..8 {
     let P=puntuacio();
