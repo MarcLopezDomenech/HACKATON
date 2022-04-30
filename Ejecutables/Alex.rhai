@@ -1,9 +1,9 @@
 //Retorna si en la posició (x,y) hi ha un worker
 fn can_move (x,y,work_ar,position){
   for w in 0..8 {
-    x=worker(w).x;
-    y=worker(w).y;
-    if i==40*x+y+position[w]{
+    let wx=worker(w).x;
+    let wy=worker(w).y;
+    if 40*x+y==40*wx+wy+position[w]{
       return false
     }
   }
@@ -17,7 +17,7 @@ fn can_move (x,y,work_ar,position){
 
 //Retorna si la casella (x,y) es troba dins del mapa i no esta pintada del nostre color.
 fn should_move(map,x,y,our_color,work_ar,position){
-  return 0<=x && x<=39 && 0<=y && y<=39 && map[x][y] != our_color && can_move(x,y,work_ar)
+  return 0<=x && x<=39 && 0<=y && y<=39 && map[x][y] != our_color && can_move(x,y,work_ar,position)
 }
 
 //donada una distancia d i un worker w, calcula el punt a distancia d que no sigui del nostre color,
@@ -74,7 +74,7 @@ fn direction(map,w,d,work_a,position){
     //info(`it moves ${result}`);
     return result
   }
-  return direction(map,w,d+1,work_a,memory.place)
+  return direction(map,w,d+1,work_a,position)
 }
 
 for w in 0..8 {
