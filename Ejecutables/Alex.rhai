@@ -55,11 +55,11 @@ fn direction(map,w,d,work_a){
       3
     }
   }
-  if should_move(map,x,y+d,our_color,work_a) && map[x][y+d] != our_color {
+  if should_move(map,x,y+d,our_color,work_a) {
     not_found_yet=false;
     0
   }
-  if should_move(map,x,y+d,our_color,work_a) && map[x][y-d] != our_color {
+  if should_move(map,x,y+d,our_color,work_a) {
     not_found_yet=false;
     1
   }
