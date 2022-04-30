@@ -20,9 +20,11 @@ fn should_move(map,x,y,our_color,work_ar,position){
   return 0<=x && x<=39 && 0<=y && y<=39 && map[x][y] != our_color && can_move(x,y,work_ar,position)
 }
 
-//donada una distancia d i un worker w, calcula el punt a distancia d que no sigui del nostre color,
-//prioritzant si és d'un altre color. Retorna un enter entre 0 i 3 que significa:
-//[0,1,2,3]=[up,down,right,left]
+/*
+donada una distancia d i un worker w, calcula el punt a distancia d que no sigui del nostre color,
+prioritzant si és d'un altre color. Retorna un enter entre 0 i 3 que significa:
+[0,1,2,3]=[up,down,right,left]
+*/
 fn direction(map,z,d,work_a,position){
   if d==40{
     info(`function fails`);
@@ -61,9 +63,9 @@ fn direction(map,z,d,work_a,position){
         //info(`it moves ${0}`);
         return 0
       }
-    }
+    } 
     //Tercer quadrant
-    if j==1 && should_move(map,x-d+i,y-i,our_color,work_a,position) {
+    if j+1==2 && should_move(map,x-d+i,y-i,our_color,work_a,position) {
       if map[x-d+i][y-i] == Tile::EMPTY {
         result=3;
       } else {
@@ -79,6 +81,15 @@ fn direction(map,z,d,work_a,position){
     return result
   }
   return direction(map,z,d+1,work_a,position)
+}
+
+//----------------------------------------------
+
+if "tick" in memory == false {
+        memory.tick = 0;
+} else {
+        engine.set_max_operations(0);
+        memory.tick += 1;
 }
 
 let position=[];
