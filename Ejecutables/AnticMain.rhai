@@ -81,22 +81,22 @@ fn direction(map,w,d,work_a,place){
     let dir=direction(map,worker(w),1,work_ar, place);
       if dir==0 {
         info(`worker ${w} moves to [${worker(w).x},${worker(w).y+1}]`);
-        //place.pad(1,40*worker(w).x+worker(w).y+1);
+        place.pad(1,40*worker(w).x+worker(w).y+1);
         worker(w).move_up();
       }
       else if dir==1 {
         info(`worker ${w} moves to [${worker(w).x},${worker(w).y-1}]`);
-        //place.pad(1,40*worker(w).x+worker(w).y-1);
+        place.pad(1,40*worker(w).x+worker(w).y-1);
         worker(w).move_down();
       }
       else if dir==2 {
         info(`worker ${w} moves to [${worker(w).x+1},${worker(w).y}]`);
-        //place.pad(1,40*worker(w).x+worker(w).y+40);
+        place.pad(1,40*worker(w).x+worker(w).y+40);
         worker(w).move_right();
       }
       else if dir==3 {
         info(`worker ${w} moves to [${worker(w).x-1},${worker(w).y}]`);
-        //place.pad(1,40*worker(w).x+worker(w).y-40);
+        place.pad(1,40*worker(w).x+worker(w).y-40);
         worker(w).move_left();
       } else {
       info(`${w} fails `);
