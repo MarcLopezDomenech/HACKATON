@@ -66,7 +66,25 @@ fn valid_pos(x,y){
   }
   false
 }
-
+fn connect(worker, w1,w2){
+  let c1 = component(w1);
+  let c2 = component(w2);
+  if c1 != c2{
+    if(worker(w1).x < worker(w2).x){
+        worker(w1).move_right();
+        worker(w2).move_left();
+    } else if worker(w1).x > worker(w2).x{
+        worker(w1).move_left();
+        worker(w2).move_right();
+    } else if worker(w1).y > worker(w2).y{
+        worker(w1).move_down();
+        worker(w1).move_up();
+    }   else{
+        worker(w2).move_down();
+        worker(w1).move_up();
+    }
+  }
+}
 
 /* Desactualizado
 //Retorna si en la posició (x,y) hi ha un worker
