@@ -18,6 +18,7 @@ fn should_move(map,x,y,our_color,work_ar){
 //[0,1,2,3]=[up,down,right,left]
 fn direction(map,w,d,work_a){
   if d>=10{
+    info(`function fails`);
     return 1
   }
   let our_color=w.color;
@@ -30,6 +31,7 @@ fn direction(map,w,d,work_a){
       if map[x+d-i][y+i] == Tile::EMPTY {
         result=2;
       } else {
+        info(`it moves ${2}`);
         return 2
       }
     }
@@ -38,6 +40,7 @@ fn direction(map,w,d,work_a){
       if map[x+d-i][y-i] == Tile::EMPTY {
         result=2;
       } else {
+        info(`it moves ${2}`);
         return 2
       }
     }
@@ -46,6 +49,7 @@ fn direction(map,w,d,work_a){
       if map[x-d+i][y+i] == Tile::EMPTY {
         result=3;
       } else {
+        info(`it moves ${3}`);
         return 3
       }
     }
@@ -54,17 +58,21 @@ fn direction(map,w,d,work_a){
       if map[x+d-i][y-i] == Tile::EMPTY {
         result=3;
       } else {
+        info(`it moves ${3}`);
         return 3
       }
     }
   }
   if result<4{
+    info(`it moves ${result}`);
     return result
   }
   if should_move(map,x,y+d,our_color,work_a) {
+    info(`it moves ${0}`);
     return 0
   }
   if should_move(map,x,y+d,our_color,work_a) {
+    info(`it moves ${1}`);
     return 1
   }
   direction(map,w,d+1,work_a)
