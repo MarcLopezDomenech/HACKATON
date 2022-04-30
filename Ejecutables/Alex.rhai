@@ -16,6 +16,9 @@ fn should_move(map,x,y,our_color,work_a){
 //prioritzant si és d'un altre color. Retorna un enter entre 0 i 3 que significa:
 //[0,1,2,3]=[up,down,right,left]
 fn direction(map,w,d,work_a){
+  if d==10{
+    1
+  }
   let our_color=w.color;
   let result=4;
   let x=w.x;
@@ -58,16 +61,12 @@ fn direction(map,w,d,work_a){
     result
   }
   if should_move(map,x,y+d,our_color,work_a) {
-    not_found_yet=false;
     0
   }
   if should_move(map,x,y+d,our_color,work_a) {
-    not_found_yet=false;
     1
   }
-  if not_found_yet{
-    direction(map,w,d+1,work_a)
-  }
+  direction(map,w,d+1,work_a)
 }
 
   for w in 0..8 {
