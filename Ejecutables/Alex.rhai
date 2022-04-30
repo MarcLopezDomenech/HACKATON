@@ -1,23 +1,23 @@
-fn puntuacio(){
-    let Puntuacio=[0,0,0,0];
+fn puntuacio(map){
+    let punt=[0,0,0,0];
     for x in 0..40 {
         for y in 0..40 {
             if map[x][y] == Tile::GREEN {
-                Puntacio[0]+=1;
-              }
-            if map[x][y] == Tile::YELLOW {
-                Puntacio[1]+=1;
-              }
-            if map[x][y] == Tile::RED {
-                Puntacio[2]+=1;
-              }
-            if map[x][y] == Tile::BLUE {
-                Puntacio[3]+=1;
-              }
+                punt[0]+=1;
+            }
+            else if map[x][y] == Tile::YELLOW {
+                punt[1]+=1;
+            }
+            else if map[x][y] == Tile::RED {
+                punt[2]+=1;
+            }
+            else if map[x][y] == Tile::BLUE {
+                punt[3]+=1;
             }
         }
-    Puntacio
-};
+    }
+    punt
+}
 
 fn max(a,b,c,d){
   if a>b & a>c & a>d {
@@ -32,13 +32,13 @@ fn max(a,b,c,d){
 }
 
 for w in 0..8 {
-    let P=puntuacio();
+    let P=puntuacio(map);
     let r = max(P[0],P[1],P[2],P[3]);
     switch r {
-        0 => worker(w).move_up(),
-        1 => worker(w).move_down(),
-        2 => worker(w).move_right(),
-        3 => worker(w).move_left(),
+        1 => worker(w).move_up(),
+        0 => worker(w).move_down(),
+        3 => worker(w).move_right(),
+        2 => worker(w).move_left(),
     }
     info(`worker ${w} finished`);
   }
