@@ -93,7 +93,7 @@ fn direction(map,w,d,work_a){
       else if dir==3 {
         worker(w).move_left();
       } else {
-      info(`${w} fails `)
+      info(`${w} fails `);
       }
       //info(`worker ${w} finished`);
     }
