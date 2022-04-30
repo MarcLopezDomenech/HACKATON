@@ -17,7 +17,7 @@ fn should_move(map,x,y,our_color,work_ar){
 //prioritzant si és d'un altre color. Retorna un enter entre 0 i 3 que significa:
 //[0,1,2,3]=[up,down,right,left]
 fn direction(map,w,d,work_a){
-  if d==10{
+  if d==40{
     info(`function fails`);
     return 1
   }
