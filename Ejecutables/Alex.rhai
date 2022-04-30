@@ -35,16 +35,16 @@ for w in 0..8 {
     let P=puntuacio(map);
     let r = max(P[0],P[1],P[2],P[3]);
     if r==1 {
-      worker(w).move_up()
+      worker(w).move_up();
     }
     else if r==0 {
-      worker(w).move_down()
+      worker(w).move_down();
     }
     else if r==3 {
-      worker(w).move_right()
+      worker(w).move_right();
     }
     else if r==2 {
-      worker(w).move_left()
+      worker(w).move_left();
     }
     info(`worker ${w} finished`);
   }
