@@ -28,6 +28,7 @@ fn new_mat(x, y) {
 
   matrix
 }
+/*
 fn puntuacio(map){
   let Puntuacio=[0,0,0,0];
   for x in 0..40 {
@@ -48,24 +49,44 @@ fn puntuacio(map){
       }
   return Puntuacio
 }
-
+*/
+fn con_rec(C,map,color,i,j){
+  print(C[i][j]);
+  print("1na");
+  print(i);
+  print("2da");
+  print(j);
+  if(C[i][j]!=0){
+    if(valid_pos(i-1,j) && map[i-1][j]==color && C[i-1][j]==0){
+      C[i-1][j]=C[i][j];
+      con_rec(C,map,color,i-1,j);
+    }
+    if(valid_pos(i+1,j) && map[i+1][j]==color && C[i+1][j]==0){
+      C[i+1][j]=C[i][j];
+      con_rec(C,map,color,i+1,j);
+    }
+    if(valid_pos(i,j-1) && map[i][j-1]==color && C[i][j-1]==0){
+      C[i][j-1]=C[i][j];
+      con_rec(C,map,color,i,j-1);
+    }
+    if(valid_pos(i,j+1) && map[i][j+1]==color && C[i][j+1]==0){
+      C[i][j+1]=C[i][j];
+      con_rec(C,map,color,i,j+1);
+    }
+  }
+}
 //Retorna la matriu components conexes
-fn conexes(C,punt,map,color){
-  let cont =0;
-  let num=punt;
+fn conexes(C,map,color){
+  let cont = 0;
+  //let num=punt;
   for j in 0..40{
     for i in 0..40{
       if(map[i][j]==color && C[i][j]==0){
-        if(valid_pos(i-1,j) && map[i-1][j]==color){
-          C[i][j]=C[i-1][j]
-        }
-        else if(valid_pos(i,j+1) && map[i][j+1]==color){
-          C[i][j]=C[i][j-1]
-        }
-        else{
           cont=cont+1;
           C[i][j]=cont;
-        }
+          print("CONTADOR");
+          print(cont);
+          con_rec(C,map,color,i,j);
       }
     }
   }
@@ -151,10 +172,10 @@ fn direction(map,w,d,work_a,M){
 
 let M=new_mat(40,40);
 let C=new_mat(40,40);
-let P=puntuacio(map);
-let m_punt;
+//let P=puntuacio(map);
+//let m_punt;
 let color=map.my_color;
-
+/* 
 if(color==Tile::GREEN){
   m_punt=P[0];
 }
@@ -166,9 +187,9 @@ else if(color==Tile::RED){
 }
 else if(Tile::BLUE){
   m_punt=P[3];
-}
+*/
 
-let num_con=conexes(C,m_punt,map,color);
+let num_con=conexes(C,map,color);
 info(`Num. de comp conexas ${num_con} `);
 for w in 0..8 {
 // color=worker(w).our_color;
