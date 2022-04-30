@@ -3,7 +3,7 @@
 //[0,1,2,3]=[up,down,right,left]
 fn direction(map,w,d){
   let not_found_yet=true;
-  let our_color=w.color;
+  let our_color=map.mycolor();
   let x=w.x;
   let y=w.y;
   for i in 0..d{
