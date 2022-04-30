@@ -1,7 +1,7 @@
 fn puntuacio(map){
     let punt=[0,0,0,0];
-    for x in 0..40 {
-        for y in 0..40 {
+    for x in 0..50 {
+        for y in 0..50 {
             if map[x][y] == Tile::GREEN {
                 punt[0]+=1;
             }
