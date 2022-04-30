@@ -31,7 +31,7 @@ fn direction(map,w,d,work_a){
       if map[x+d-i][y+i] == Tile::EMPTY {
         result=2;
       } else {
-        info(`it moves ${2}`);
+        //info(`it moves ${2}`);
         return 2
       }
     }
@@ -40,7 +40,7 @@ fn direction(map,w,d,work_a){
       if map[x+d-i-1][y-i-1] == Tile::EMPTY {
         result=1;
       } else {
-        info(`it moves ${1}`);
+        //info(`it moves ${1}`);
         return 1
       }
     }
@@ -49,7 +49,7 @@ fn direction(map,w,d,work_a){
       if map[x-d+i+1][y+i+1] == Tile::EMPTY {
         result=0;
       } else {
-        info(`it moves ${0}`);
+        //info(`it moves ${0}`);
         return 0
       }
     }
@@ -58,13 +58,13 @@ fn direction(map,w,d,work_a){
       if map[x-d+i][y-i] == Tile::EMPTY {
         result=3;
       } else {
-        info(`it moves ${3}`);
+        //info(`it moves ${3}`);
         return 3
       }
     }
   }
   if result<4{
-    info(`it moves ${result}`);
+    //info(`it moves ${result}`);
     return result
   }
   direction(map,w,d+1,work_a)
