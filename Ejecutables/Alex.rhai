@@ -2,22 +2,22 @@
 fn can_move(x,y,work_ar){
   for w in work_ar{
     if w.x==x && w.y==y{
-      false
+      return false
     }
   }
-  true
+  return true
 }
 
 //Retorna si la casella (x,y) es troba dins del mapa i no esta pintada del nostre color.
 fn should_move(map,x,y,our_color,work_ar){
-  -1<x<40 && -1<y<40 && map[x][y] != our_color && can_move(x,y,work_ar)
+  return -1<x && x<40 && -1<y && y<40 && map[x][y] != our_color && can_move(x,y,work_ar)
 }
 
 //donada una distancia d i un worker w, calcula el punt a distancia d que no sigui del nostre color,
 //prioritzant si és d'un altre color. Retorna un enter entre 0 i 3 que significa:
 //[0,1,2,3]=[up,down,right,left]
 fn direction(map,w,d,work_a){
-  if d>=10{
+  if d==10{
     info(`function fails`);
     return 1
   }
