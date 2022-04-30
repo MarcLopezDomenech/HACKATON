@@ -106,27 +106,36 @@ fn direction(map,w,d,work_a,M){
 }
 
 let M=new_mat(40,40);
+Objs=new_mat(8, 2)
 for w in 0..8 {
   let work_ar=map.workers;
   let dir=direction(map,worker(w),1,work_ar,M);
     if dir==0 {
       info(`worker ${w} moves to [${worker(w).x},${worker(w).y+1}]`);
       M[worker(w).x][worker(w).y+1]=1;
+      Objs[w][0]=worker(w).x;
+      Objs[w][1]=worker(w).y+1;
       worker(w).move_up();
     }
     else if dir==1 {
       info(`worker ${w} moves to [${worker(w).x},${worker(w).y-1}]`);
       M[worker(w).x][worker(w).y-1]=1;
+      Objs[w][0]=worker(w).x;
+      Objs[w][1]=worker(w).y-1;
       worker(w).move_down();
     }
     else if dir==2 {
       info(`worker ${w} moves to [${worker(w).x+1},${worker(w).y}]`);
       M[worker(w).x+1][worker(w).y]=1;
+      Objs[w][0]=worker(w).x+1;
+      Objs[w][1]=worker(w).y;
       worker(w).move_right();
     }
     else if dir==3 {
       info(`worker ${w} moves to [${worker(w).x-1},${worker(w).y}]`);
       M[worker(w).x-1][worker(w).y]=1;
+      Objs[w][0]=worker(w).x-1;
+      Objs[w][1]=worker(w).y;
       worker(w).move_left();
     } else {
     info(`${w} fails `);
