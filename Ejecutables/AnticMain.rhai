@@ -76,7 +76,7 @@ fn direction(map,w,d,work_a,place){
 }
 
   for w in 0..8 {
-    place = [];
+    let place = [];
     let work_ar=map.workers;
     let dir=direction(map,worker(w),1,work_ar, place);
       if dir==0 {
