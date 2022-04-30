@@ -1,12 +1,3 @@
-fn new_mat(x, y) {
-  let row = [];
-  row.pad(y, 0);
-
-  let matrix = [];
-  matrix.pad(x, row);
-
-  matrix
-}
 //Retorna si en la posició (x,y) hi ha un worker
 fn can_move(x,y,work_ar,M){
   for w in work_ar{
@@ -26,6 +17,59 @@ fn valid_pos(x,y){
     return true
   }
   return false
+}
+
+fn new_mat(x, y) {
+  let row = [];
+  row.pad(y, 0);
+
+  let matrix = [];
+  matrix.pad(x, row);
+
+  matrix
+}
+fn puntuacio(map){
+  let Puntuacio=[0,0,0,0];
+  for x in 0..40 {
+      for y in 0..40 {
+          if map[x][y] == Tile::GREEN {
+              Puntuacio[0]+=1
+            }
+          if map[x][y] == Tile::YELLOW {
+              Puntuacio[1]+=1
+            }
+          if map[x][y] == Tile::RED {
+              Puntuacio[2]+=1
+            }
+          if map[x][y] == Tile::BLUE {
+              Puntuacio[3]+=1
+            }
+          }
+      }
+  return Puntuacio
+}
+
+//Retorna la matriu components conexes
+fn conexes(C,punt,map,color){
+  let cont =0;
+  let num=punt;
+  for j in 0..40{
+    for i in 0..40{
+      if(map[i][j]==color && C[i][j]==0){
+        if(valid_pos(i-1,j) && map[i-1][j]==color){
+          C[i][j]=C[i-1][j]
+        }
+        else if(valid_pos(i,j+1) && map[i][j+1]==color){
+          C[i][j]=C[i][j-1]
+        }
+        else{
+          cont=cont+1;
+          C[i][j]=cont;
+        }
+      }
+    }
+  }
+  return cont;
 }
 
 //Retorna si la casella (x,y) es troba dins del mapa i no esta pintada del nostre color.
@@ -106,7 +150,28 @@ fn direction(map,w,d,work_a,M){
 }
 
 let M=new_mat(40,40);
+let C=new_mat(40,40);
+let P=puntuacio(map);
+let m_punt;
+let color=map.my_color;
+
+if(color==Tile::GREEN){
+  m_punt=P[0];
+}
+else if(color==Tile::YELLOW){
+  m_punt=P[1];
+}
+else if(color==Tile::RED){
+  m_punt=P[2];
+}
+else if(Tile::BLUE){
+  m_punt=P[3];
+}
+
+let num_con=conexes(C,m_punt,map,color);
+info(`Num. de comp conexas ${num_con} `);
 for w in 0..8 {
+// color=worker(w).our_color;
   let work_ar=map.workers;
   let dir=direction(map,worker(w),1,work_ar,M);
     if dir==0 {
