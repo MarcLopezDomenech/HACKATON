@@ -1,6 +1,6 @@
 # Cosas a hacer
 ## Pendiente
-- [X] Contador de los puntos que tenemos y de los enemigos
+- [ ] Contador de los puntos que tenemos y de los enemigos
 - [ ] Que casillas nos dan el máximo aumento de puntos(Valor de cada casilla)
 - [ ] Que casillas resta el máximo número de puntos(Valor de cada casilla)
 
