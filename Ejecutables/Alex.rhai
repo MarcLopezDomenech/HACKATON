@@ -21,7 +21,7 @@ fn should_move(map,x,y,our_color,work_ar,position){
 }
 
 fn adapt(init,j,z,quadrant){
-  return ((j==0) && (init==quadrant | ((init-quadrant)%2).abs()==1 && j==(z%2).abs()))|((j==1) && (init==quadrant | ((init-quadrant)%2).abs()==1 && j==((z+1)%2).abs()))
+  return ((j==0) && (init==quadrant | ((init-quadrant)%2).abs()==1 && j==(z%2).abs()))|((j==1) && (init==((quadrant+2)%4).abs() | ((init-quadrant)%2).abs()==1 && j==((z+1)%2).abs()))
 }
 
 /*
@@ -41,44 +41,43 @@ fn direction(map,z,d,work_a,position,init){
   let y=w.y;
   for j in 0..2{
     for i in 0..d{
-    //Primer quadrant
-    if adapt(init,j,z,1) && should_move(map,x+d-i,y+i,our_color,work_a,position) {
-      if map[x+d-i][y+i] == Tile::EMPTY {
-        result=2;
+      //Primer quadrant
+      if adapt(init,j,z,1) && should_move(map,x+d-i,y+i,our_color,work_a,position) {
+        if map[x+d-i][y+i] == Tile::EMPTY && result==4 {
+          result=2;
       } else {
-        //info(`it moves ${2}`);
-        return 2
+          //info(`it moves ${2}`);
+          return 2
       }
     }
-    //Quart quadrant
-    if adapt(init,j+1,z,4) && should_move(map,x+d-i-1,y-i-1,our_color,work_a,position) {
-      if map[x+d-i-1][y-i-1] == Tile::EMPTY {
-        result=1;
+      //Quart quadrant
+      if adapt(init,j,z+1,4) && should_move(map,x+d-i-1,y-i-1,our_color,work_a,position) {
+        if map[x+d-i-1][y-i-1] == Tile::EMPTY && result==4 {
+          result=1;
       } else {
         //info(`it moves ${1}`);
         return 1
       }
     }
-    //Segon quadrant
-    if adapt(init,j,z,2) && should_move(map,x-d+i+1,y+i+1,our_color,work_a,position) {
-      if map[x-d+i+1][y+i+1] == Tile::EMPTY {
-        result=0;
+      //Segon quadrant
+      if adapt(init,j,z,2) && should_move(map,x-d+i+1,y+i+1,our_color,work_a,position) {
+        if map[x-d+i+1][y+i+1] == Tile::EMPTY && result==4 {
+          result=0;
       } else {
         //info(`it moves ${0}`);
         return 0
       }
     }
-    //Tercer quadrant
-    if adapt(init,j+1,z,3) && should_move(map,x-d+i,y-i,our_color,work_a,position) {
-      if map[x-d+i][y-i] == Tile::EMPTY {
-        result=3;
+      //Tercer quadrant
+      if adapt(init,j,z+1,3) && should_move(map,x-d+i,y-i,our_color,work_a,position) {
+        if map[x-d+i][y-i] == Tile::EMPTY && result==4 {
+          result=3;
       } else {
         //info(`it moves ${3}`);
         return 3
       }
     }
-    }
-
+  }
   }
   if result<4{
     //info(`it moves ${result}`);
@@ -99,15 +98,15 @@ if "init" in memory == false {
         let y=worker(0).y;
         if x<20 {
           if y<20{
-            memory.init = 3;
+            memory.init = 3; //x<20,y<20
           } else {
-            memory.init = 2;
+            memory.init = 2; //x<20,y>20
             }
         } else{
           if y<20{
-            memory.init = 4;
+            memory.init = 4; //x>20,y<20
           } else {
-            memory.init = 1;
+            memory.init = 1; //x>20,y>20
             }
         }
 } else {
