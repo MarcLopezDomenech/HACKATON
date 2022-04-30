@@ -14,7 +14,7 @@ fn can_move (x,y,work_ar){
 }
 
 //Retorna si la casella (x,y) es troba dins del mapa i no esta pintada del nostre color.
-fn should_move(map,x,y,our_color,work_ar,memory.place){
+fn should_move(map,x,y,our_color,work_ar){
   return 0<=x && x<=39 && 0<=y && y<=39 && map[x][y] != our_color && can_move(x,y,work_ar)
 }
 
