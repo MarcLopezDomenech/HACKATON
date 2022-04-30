@@ -1,6 +1,6 @@
 //Retorna si en la posició (x,y) hi ha un worker
-fn can_move(x,y,work_arr){
-  for w in work_arr{
+fn can_move(x,y,work_ar){
+  for w in work_ar{
     if w.x==x && w.y==y{
       false
     }
