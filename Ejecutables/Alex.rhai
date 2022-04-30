@@ -16,18 +16,18 @@ fn puntuacio(){
             }
             }
         }
-    Puntacio
+    return Puntacio
 };
 
 fn max(a,b,c,d){
   if a>b & a>c & a>d {
-    0
+    return 0
   } else if b>c & b>d {
-    1
+    return 1
   } else if c>d {
-    2
+    return 2
   } else {
-    3
+    return 3
   }
 };
 
