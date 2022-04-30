@@ -104,4 +104,5 @@ for w in 0..8 {
     } else {
     info(`${w} fails `);
     }
+    //info(`MOVES ${w}, position 4th worker: [${worker(4).x},${worker(4).y}]`)
   }
