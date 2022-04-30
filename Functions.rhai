@@ -21,16 +21,6 @@ fn puntuacio(){
     Puntacio
 }
 
-//Retorna si en la posició (x,y) hi ha un worker
-fn can_move(x,y){
-  for w in map.workers{
-    if w.x==x & w.y==y{
-      false
-    }
-  }
-  true
-}
-
 //Retorna si en la posició (x,y) es enemiga
 fn casilla_enemiga(x,y,map){
   if map[x][y]!=Tile::EMPTY && map[x][y]!=map.mycolor(){
@@ -76,3 +66,16 @@ fn valid_pos(x,y){
   }
   false
 }
+
+
+/* Desactualizado
+//Retorna si en la posició (x,y) hi ha un worker
+fn can_move(x,y){
+  for w in map.workers{
+    if w.x==x & w.y==y{
+      false
+    }
+  }
+  true
+}
+*/
