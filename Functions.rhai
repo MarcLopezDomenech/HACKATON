@@ -96,9 +96,4 @@ fn can_move(x,y){
   }
   true
 }
-fn distancia(worker, w1,w2){
-    dx = (worker(w1).x - worker(w2).x).abs();
-    dy = (worker(w1).y - worker(w2).y).abs();
-    return dx+dy;
-}
 */
