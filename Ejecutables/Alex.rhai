@@ -17,7 +17,7 @@ fn puntuacio(){
             }
         }
     Puntacio
-}
+};
 
 fn max(a,b,c,d){
   if a>b & a>c & a>d {
