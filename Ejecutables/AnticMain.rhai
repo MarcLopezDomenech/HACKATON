@@ -74,19 +74,19 @@ fn direction(map,w,d,work_a){
     let work_ar=map.workers;
     let dir=direction(map,worker(w),1,work_ar);
       if dir==0 {
-        info(`worker ${w} moves to [${worker(w).x}${worker(w).y+1}]`);
+        info(`worker ${w} moves to [${worker(w).x},${worker(w).y+1}]`);
         worker(w).move_up();
       }
       else if dir==1 {
-        info(`worker ${w} moves to [${worker(w).x}${worker(w).y-1}]`);
+        info(`worker ${w} moves to [${worker(w).x},${worker(w).y-1}]`);
         worker(w).move_down();
       }
       else if dir==2 {
-        info(`worker ${w} moves to [${worker(w).x+1}${worker(w).y}]`);
+        info(`worker ${w} moves to [${worker(w).x+1},${worker(w).y}]`);
         worker(w).move_right();
       }
       else if dir==3 {
-        info(`worker ${w} moves to [${worker(w).x-1}${worker(w).y}]`);
+        info(`worker ${w} moves to [${worker(w).x-1},${worker(w).y}]`);
         worker(w).move_left();
       } else {
       info(`${w} fails `);
