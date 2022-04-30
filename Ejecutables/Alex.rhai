@@ -1,9 +1,5 @@
-"""Estratègia de prova"""
-
-
-//Funció que retorna un vector amb la puntuació de cada color:
-//Puntuació=[verd, groc, vermell, blau]
-fn puntuacio(Puntuacio){
+fn puntuacio(){
+    let Puntuacio=[0,0,0,0];
     for x in 0..40 {
         for y in 0..40 {
             if map[x][y] == Tile::GREEN {
@@ -26,9 +22,9 @@ fn puntuacio(Puntuacio){
 fn max(a,b,c,d){
   if a>b & a>c & a>d {
     0
-  } else if b>c & b>d{
+  } else if b>c & b>d {
     1
-  } else if c>d{
+  } else if c>d {
     2
   } else {
     3
@@ -36,7 +32,7 @@ fn max(a,b,c,d){
 }
 
 for w in 0..8 {
-    let P=puntuacio([0,0,0,0]);
+    let P=puntuacio();
     let r = max(P[0],P[1],P[2],P[3]);
     switch r {
         0 => worker(w).move_up(),
@@ -44,5 +40,5 @@ for w in 0..8 {
         2 => worker(w).move_right(),
         3 => worker(w).move_left(),
     }
-      info(`worker ${w} finished`);
+    info(`worker ${w} finished`);
   }
