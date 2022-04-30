@@ -63,10 +63,6 @@ fn direction(map,w,d,work_a){
       }
     }
   }
-  if result<4{
-    info(`it moves ${result}`);
-    return result
-  }
   if should_move(map,x,y+d,our_color,work_a) {
     info(`it moves ${0}`);
     return 0
@@ -74,6 +70,10 @@ fn direction(map,w,d,work_a){
   if should_move(map,x,y-d,our_color,work_a) {
     info(`it moves ${1}`);
     return 1
+  }
+  if result<4{
+    info(`it moves ${result}`);
+    return result
   }
   direction(map,w,d+1,work_a)
 }
