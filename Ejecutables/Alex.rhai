@@ -2,7 +2,7 @@
 fn can_move(x,y,work_arr){
   for w in work_arr{
     if w.x==x && w.y==y{
-      false;
+      false
     }
   }
   true
