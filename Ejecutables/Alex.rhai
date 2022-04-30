@@ -30,7 +30,7 @@ fn direction(map,w,d,work_a){
       if map[x+d-i][y+i] == Tile::EMPTY {
         result=2;
       } else {
-        2
+        return 2
       }
     }
     //Quart quadrant
@@ -38,7 +38,7 @@ fn direction(map,w,d,work_a){
       if map[x+d-i][y-i] == Tile::EMPTY {
         result=2;
       } else {
-        2
+        return 2
       }
     }
     //Segon quadrant
@@ -46,7 +46,7 @@ fn direction(map,w,d,work_a){
       if map[x-d+i][y+i] == Tile::EMPTY {
         result=3;
       } else {
-        3
+        return 3
       }
     }
     //Tercer quadrant
@@ -54,23 +54,23 @@ fn direction(map,w,d,work_a){
       if map[x+d-i][y-i] == Tile::EMPTY {
         result=3;
       } else {
-        3
+        return 3
       }
     }
   }
   if result<4{
-    result
+    return result
   }
   if should_move(map,x,y+d,our_color,work_a) {
-    0
+    return 0
   }
   if should_move(map,x,y+d,our_color,work_a) {
-    1
+    return 1
   }
   direction(map,w,d+1,work_a)
 }
 
-  for w in 0..8 {
+  for w in 0..1 {
     let work_ar=map.workers;
     let dir=direction(map,worker(w),1,work_ar);
       if dir==0 {
