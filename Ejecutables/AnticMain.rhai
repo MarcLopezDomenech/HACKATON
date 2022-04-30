@@ -1,7 +1,9 @@
 //Retorna si en la posició (x,y) hi ha un worker
-fn can_move (x,y,work_ar){
-  for i in memory.place {
-    if i==40*x+y{
+fn can_move (x,y,work_ar,position){
+  for w in 0..8 {
+    x=worker(w).x;
+    y=worker(w).y;
+    if i==40*x+y+position[w]{
       return false
     }
   }
@@ -14,14 +16,14 @@ fn can_move (x,y,work_ar){
 }
 
 //Retorna si la casella (x,y) es troba dins del mapa i no esta pintada del nostre color.
-fn should_move(map,x,y,our_color,work_ar){
+fn should_move(map,x,y,our_color,work_ar,position){
   return 0<=x && x<=39 && 0<=y && y<=39 && map[x][y] != our_color && can_move(x,y,work_ar)
 }
 
 //donada una distancia d i un worker w, calcula el punt a distancia d que no sigui del nostre color,
 //prioritzant si és d'un altre color. Retorna un enter entre 0 i 3 que significa:
 //[0,1,2,3]=[up,down,right,left]
-fn direction(map,w,d,work_a){
+fn direction(map,w,d,work_a,position){
   if d==40{
     info(`function fails`);
     return 1
@@ -32,7 +34,7 @@ fn direction(map,w,d,work_a){
   let y=w.y;
   for i in 0..d{
     //Primer quadrant
-    if should_move(map,x+d-i,y+i,our_color,work_a) {
+    if should_move(map,x+d-i,y+i,our_color,work_a,position) {
       if map[x+d-i][y+i] == Tile::EMPTY {
         result=2;
       } else {
@@ -41,7 +43,7 @@ fn direction(map,w,d,work_a){
       }
     }
     //Quart quadrant
-    if should_move(map,x+d-i-1,y-i-1,our_color,work_a) {
+    if should_move(map,x+d-i-1,y-i-1,our_color,work_a,position) {
       if map[x+d-i-1][y-i-1] == Tile::EMPTY {
         result=1;
       } else {
@@ -50,7 +52,7 @@ fn direction(map,w,d,work_a){
       }
     }
     //Segon quadrant
-    if should_move(map,x-d+i+1,y+i+1,our_color,work_a) {
+    if should_move(map,x-d+i+1,y+i+1,our_color,work_a,position) {
       if map[x-d+i+1][y+i+1] == Tile::EMPTY {
         result=0;
       } else {
@@ -59,7 +61,7 @@ fn direction(map,w,d,work_a){
       }
     }
     //Tercer quadrant
-    if should_move(map,x-d+i,y-i,our_color,work_a) {
+    if should_move(map,x-d+i,y-i,our_color,work_a,position) {
       if map[x-d+i][y-i] == Tile::EMPTY {
         result=3;
       } else {
@@ -75,28 +77,29 @@ fn direction(map,w,d,work_a){
   return direction(map,w,d+1,work_a,memory.place)
 }
 
-memory.place = [];
 for w in 0..8 {
+  let position=[];
+  position.pad(8,0);
   let work_ar=map.workers;
-  let dir=direction(map,worker(w),1,work_ar);
+  let dir=direction(map,worker(w),1,work_ar,position);
     if dir==0 {
       info(`worker ${w} moves to [${worker(w).x},${worker(w).y+1}]`);
-      memory.place.pad(1,40*worker(w).x+worker(w).y+1);
+      position[w]=1;
       worker(w).move_up();
     }
     else if dir==1 {
       info(`worker ${w} moves to [${worker(w).x},${worker(w).y-1}]`);
-      memory.place.pad(1,40*worker(w).x+worker(w).y-1);
+      position[w]=-1;
       worker(w).move_down();
     }
     else if dir==2 {
       info(`worker ${w} moves to [${worker(w).x+1},${worker(w).y}]`);
-      memory.place.pad(1,40*worker(w).x+worker(w).y+40);
+      position[w]=40;
       worker(w).move_right();
     }
     else if dir==3 {
       info(`worker ${w} moves to [${worker(w).x-1},${worker(w).y}]`);
-      memory.place.pad(1,40*worker(w).x+worker(w).y-40);
+      position[w]=-40;
       worker(w).move_left();
     } else {
     info(`${w} fails `);
