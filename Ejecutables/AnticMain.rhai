@@ -37,7 +37,7 @@ fn direction(map,w,d,work_a){
     }
     //Quart quadrant
     if should_move(map,x+d-i-1,y-i-1,our_color,work_a) {
-      if map[x+d-i][y-i] == Tile::EMPTY {
+      if map[x+d-i-1][y-i-1] == Tile::EMPTY {
         result=1;
       } else {
         info(`it moves ${1}`);
@@ -46,7 +46,7 @@ fn direction(map,w,d,work_a){
     }
     //Segon quadrant
     if should_move(map,x-d+i+1,y+i+1,our_color,work_a) {
-      if map[x-d+i][y+i] == Tile::EMPTY {
+      if map[x-d+i+1][y+i+1] == Tile::EMPTY {
         result=0;
       } else {
         info(`it moves ${0}`);
