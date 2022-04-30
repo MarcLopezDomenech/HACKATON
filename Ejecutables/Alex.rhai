@@ -44,17 +44,17 @@ fn direction(map,w,d,work_a){
     //Segon quadrant
     if should_move(map,x-d+i,y+i,our_color,work_a) {
       if map[x-d+i][y+i] == Tile::EMPTY {
-        result=2;
+        result=3;
       } else {
-        2
+        3
       }
     }
     //Tercer quadrant
     if should_move(map,x-d+i,y-i,our_color,work_a) && map[x-d+i][y-i] != Tile::EMPTY {
       if map[x+d-i][y-i] == Tile::EMPTY {
-        result=2;
+        result=3;
       } else {
-        2
+        3
       }
     }
   }
