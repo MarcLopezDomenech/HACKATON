@@ -31,7 +31,7 @@ fn max(a,b,c,d){
   }
 }
 
-for w in 0..8 {
+for w in 0..1 {
     let P=puntuacio(map);
     let r = max(P[0],P[1],P[2],P[3]);
     if r==1 {
@@ -46,5 +46,6 @@ for w in 0..8 {
     else if r==2 {
       worker(w).move_left();
     }
-    info(`worker ${w} finished`);
+    info(`worker ${P[0]} , ${P[1]} , ${P[2]} , ${P[3]} ,finished`);
+    //info(`worker ${w} finished`);
   }
