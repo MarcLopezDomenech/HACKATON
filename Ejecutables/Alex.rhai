@@ -20,7 +20,7 @@ fn puntuacio(Puntuacio){
               }
             }
         }
-    Puntacio;
+    Puntacio
 }
 
 fn max(a,b,c,d){
