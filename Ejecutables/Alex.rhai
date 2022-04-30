@@ -5,13 +5,13 @@ fn puntuacio(){
             if map[x][y] == Tile::GREEN {
                 Puntacio[0]+=1;
               }
-            if map[x][y] == Tile::YELLOW {
+            else if map[x][y] == Tile::YELLOW {
                 Puntacio[1]+=1;
               }
-            if map[x][y] == Tile::RED {
+            else if map[x][y] == Tile::RED {
                 Puntacio[2]+=1;
               }
-            if map[x][y] == Tile::BLUE {
+            else if map[x][y] == Tile::BLUE {
                 Puntacio[3]+=1;
               }
             }
