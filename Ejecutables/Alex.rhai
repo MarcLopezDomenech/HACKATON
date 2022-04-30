@@ -16,7 +16,7 @@ fn puntuacio(map){
             }
         }
     }
-    Puntacio
+    punt
 }
 
 fn max(a,b,c,d){
