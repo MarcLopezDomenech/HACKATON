@@ -51,11 +51,6 @@ fn puntuacio(map){
 }
 */
 fn con_rec(C,map,color,i,j){
-  print(C[i][j]);
-  print("1na");
-  print(i);
-  print("2da");
-  print(j);
   if(C[i][j]!=0){
     if(valid_pos(i-1,j) && map[i-1][j]==color && C[i-1][j]==0){
       C[i-1][j]=C[i][j];
@@ -84,8 +79,6 @@ fn conexes(C,map,color){
       if(map[i][j]==color && C[i][j]==0){
           cont=cont+1;
           C[i][j]=cont;
-          print("CONTADOR");
-          print(cont);
           con_rec(C,map,color,i,j);
       }
     }
