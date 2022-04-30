@@ -3,7 +3,7 @@
 //[0,1,2,3]=[up,down,right,left]
 fn direction(map,w,d){
   let not_found_yet=true;
-  let our_color=map.mycolor();
+  let our_color=w.color;
   let x=w.x;
   let y=w.y;
   for i in 0..d{
@@ -63,19 +63,19 @@ fn direction(map,w,d){
   }
 }
 
-for w in 0..8 {
-  let dir=direction(map,worker(w),1);
-    if dir==0 {
-      worker(w).move_up();
+  for w in 0..8 {
+    let dir=direction(map,worker(w),1);
+      if dir==0 {
+        worker(w).move_up();
+      }
+      else if dir==1 {
+        worker(w).move_down();
+      }
+      else if dir==2 {
+        worker(w).move_right();
+      }
+      else if dir==3 {
+        worker(w).move_left();
+      }
+      info(`worker ${w} finished`);
     }
-    else if dir==1 {
-      worker(w).move_down();
-    }
-    else if dir==2 {
-      worker(w).move_right();
-    }
-    else if dir==3 {
-      worker(w).move_left();
-    }
-    info(`worker ${w} finished`);
-  }
