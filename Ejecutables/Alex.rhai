@@ -63,19 +63,19 @@ fn direction(map,w,d){
   }
 }
 
-  for w in 0..8 {
-    let dir=direction(map,worker(w),1);
-      if dir==0 {
-        worker(w).move_up();
-      }
-      else if dir==1 {
-        worker(w).move_down();
-      }
-      else if dir==2 {
-        worker(w).move_right();
-      }
-      else if dir==3 {
-        worker(w).move_left();
-      }
-      info(`worker ${w} finished`);
+for w in 0..8 {
+  let dir=direction(map,worker(w),1);
+    if dir==0 {
+      worker(w).move_up();
     }
+    else if dir==1 {
+      worker(w).move_down();
+    }
+    else if dir==2 {
+      worker(w).move_right();
+    }
+    else if dir==3 {
+      worker(w).move_left();
+    }
+    info(`worker ${w} finished`);
+  }
