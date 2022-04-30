@@ -3,21 +3,20 @@
 
 //Funció que retorna un vector amb la puntuació de cada color:
 //Puntuació=[verd, groc, vermell, blau]
-fn puntuacio(){
-    let Puntuacio=[0,0,0,0];
+fn puntuacio(Puntuacio){
     for x in 0..40 {
         for y in 0..40 {
             if map[x][y] == Tile::GREEN {
-                Puntacio[0]+=1
+                Puntacio[0]+=1;
               }
             if map[x][y] == Tile::YELLOW {
-                Puntacio[1]+=1
+                Puntacio[1]+=1;
               }
             if map[x][y] == Tile::RED {
-                Puntacio[2]+=1
+                Puntacio[2]+=1;
               }
             if map[x][y] == Tile::BLUE {
-                Puntacio[3]+=1
+                Puntacio[3]+=1;
               }
             }
         }
@@ -37,7 +36,7 @@ fn max(a,b,c,d){
 }
 
 for w in 0..8 {
-    let P=puntuacio();
+    let P=puntuacio([0,0,0,0]);
     let r = max(P[0],P[1],P[2],P[3]);
     switch r {
         0 => worker(w).move_up(),
