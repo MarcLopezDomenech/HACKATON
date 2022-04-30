@@ -36,9 +36,9 @@ for w in 0..8 {
     let r = max(P[0],P[1],P[2],P[3]);
     switch r {
         1 => worker(w).move_up(),
-        2 => worker(w).move_down(),
+        0 => worker(w).move_down(),
         3 => worker(w).move_right(),
-        0 => worker(w).move_left(),
+        2 => worker(w).move_left(),
     }
     info(`worker ${w} finished`);
   }
