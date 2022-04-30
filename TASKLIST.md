@@ -12,3 +12,10 @@
 - [ ] Cuantos puntos de media serían necesarios para ganar
 - [ ] Como es la mejor manera de interconectar conjuntos
 - [ ] En que posición queremos que esten nuestras fichas de "normal"
+
+##Documentació de funcions (al document Functions.rhai)
+- puntuacio()
+//Funció que retorna un vector amb la puntuació de cada color:
+//Puntuació=[verd, groc, vermell, blau]
+- can_move(x,y)
+//Retorna si en la posició (x,y) hi ha un worker

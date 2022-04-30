@@ -1,5 +1,5 @@
-"""Funció que retorna un vector amb la puntuació de cada color:
-Puntuació=[verd, groc, vermell, blau]"""
+//Funció que retorna un vector amb la puntuació de cada color:
+//Puntuació=[verd, groc, vermell, blau]
 fn puntuacio(){
     let Puntuacio=[0,0,0,0];
     for x in 0..40 {
@@ -19,4 +19,14 @@ fn puntuacio(){
             }
         }
     Puntacio
+}
+
+//Retorna si en la posició (x,y) hi ha un worker
+fn can_move(x,y){
+  for w in map.workers{
+    if w.x==x & w.y==y{
+      false
+    }
+  }
+  true
 }

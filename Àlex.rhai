@@ -47,3 +47,16 @@ for w in 0..8 {
     }
       info(`worker ${w} finished`);
   }
+
+
+
+
+//Retorna si en aquella posició hi ha un worker (i no ens podem moure allà)
+fn can_move(x,y){
+  for w in map.workers{
+    if w.x==x & w.y==y{
+      false
+    }
+  }
+  true
+}
