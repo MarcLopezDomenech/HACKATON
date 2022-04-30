@@ -17,43 +17,45 @@ fn should_move(map,x,y,our_color,work_a){
 //[0,1,2,3]=[up,down,right,left]
 fn direction(map,w,d,work_a){
   let our_color=w.color;
+  let result=4;
   let x=w.x;
   let y=w.y;
   for i in 0..d{
     //Primer quadrant
-    if should_move(map,x+d-i,y+i,our_color,work_a) && map[x+d-i][y+i] != Tile::EMPTY {
-      2
-    }
-    //Quart quadrant
-    if should_move(map,x+d-i,y-i,our_color,work_a) && map[x+d-i][y-i] != Tile::EMPTY {
-      2
-    }
-    //Segon quadrant
-    if should_move(map,x-d+i,y+i,our_color,work_a) && map[x-d+i][y+i] != Tile::EMPTY {
-      3
-    }
-    //Tercer quadrant
-    if should_move(map,x-d+i,y-i,our_color,work_a) && map[x-d+i][y-i] != Tile::EMPTY {
-      3
-    }
-  }
-  for i in 0..d{
-    //Primer quadrant
     if should_move(map,x+d-i,y+i,our_color,work_a) {
-      2
+      if map[x+d-i][y+i] == Tile::EMPTY {
+        result=2;
+      } else {
+        2
+      }
     }
     //Quart quadrant
     if should_move(map,x+d-i,y-i,our_color,work_a) {
-      2
+      if map[x+d-i][y-i] == Tile::EMPTY {
+        result=2;
+      } else {
+        2
+      }
     }
     //Segon quadrant
     if should_move(map,x-d+i,y+i,our_color,work_a) {
-      3
+      if map[x-d+i][y+i] == Tile::EMPTY {
+        result=2;
+      } else {
+        2
+      }
     }
     //Tercer quadrant
-    if should_move(map,x-d+i,y-i,our_color,work_a) {
-      3
+    if should_move(map,x-d+i,y-i,our_color,work_a) && map[x-d+i][y-i] != Tile::EMPTY {
+      if map[x+d-i][y-i] == Tile::EMPTY {
+        result=2;
+      } else {
+        2
+      }
     }
+  }
+  if result<4{
+    result
   }
   if should_move(map,x,y+d,our_color,work_a) {
     not_found_yet=false;
