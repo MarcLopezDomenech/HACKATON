@@ -27,7 +27,7 @@ fn puntuacio(){
 fn max(a,b,c,d){
   if a>b & a>c & a>d {
     0
-  } else if b>c&b>d{
+  } else if b>c & b>d{
     1
   } else if c>d{
     2
