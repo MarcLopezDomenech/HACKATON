@@ -1,33 +1,8 @@
 """Estratègia de prova"""
 
 
-for w in map.workers {
-  #Logic to check worker placement
-}
-
-for x in 0..40 {
-    for y in 0..40 {
-        if map[x][y] == Tile::EMPTY {
-            # more logic
-          }
-        #other logic
-      }
-  }
-
-for w in 0..8 {
-    let r = (rand() % 4).abs();
-    switch r{
-          0 = > worker(w).move_up(),
-          1 = > worker(w).move_down(),
-          2 = > worker(w).move_right(),
-          3 = > worker(w).move_left(),
-      }
-
-      info(`worker ${w} finished`);
-  }
-
-"""Funció que retorna un vector amb la puntuació de cada color:
-Puntuació=[verd, groc, vermell, blau]"""
+//Funció que retorna un vector amb la puntuació de cada color:
+//Puntuació=[verd, groc, vermell, blau]
 fn puntuacio(){
     let Puntuacio=[0,0,0,0];
     for x in 0..40 {
@@ -48,3 +23,27 @@ fn puntuacio(){
         }
     Puntacio
 }
+
+fn max(a,b,c,d){
+  if a>b & a>c & a>d {
+    0
+  } else if b>c&b>d{
+    1
+  } else if c>d{
+    2
+  } else {
+    3
+  }
+}
+
+for w in 0..8 {
+    let P=puntuacio();
+    let r = max(P[0],P[1],P[2],P[3]);
+    switch r {
+        0 => worker(w).move_up(),
+        1 => worker(w).move_down(),
+        2 => worker(w).move_right(),
+        3 => worker(w).move_left(),
+    }
+      info(`worker ${w} finished`);
+  }
