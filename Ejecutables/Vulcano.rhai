@@ -192,7 +192,7 @@ fn direction(map,w,d,work_a,M,resultat_c,dist_c,x_c,y_c){
     //info(`it moves ${result}`);
     return Resultat_p
   }
-  if Result[0]<4 && dist+5<dist_c{
+  if Result[0]<4 && dist+4<dist_c{
     //info(`it moves ${result}`);
     return Result
   }
