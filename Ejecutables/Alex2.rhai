@@ -25,13 +25,15 @@ fn should_move(map,x,y,our_color,work_ar,position){
 //[0,1,2,3]=[up,down,right,left]
 fn direction(map,z,d,work_a,position,init){
   if init==1{
-    direction1(map,z,d,work_a,position)
+    return direction1(map,z,d,work_a,position)
   } else if init==2{
-    direction2(map,z,d,work_a,position)
+    return direction2(map,z,d,work_a,position)
   } else if init==3{
-    direction3(map,z,d,work_a,position)
+    return direction3(map,z,d,work_a,position)
   } else if init==4{
-    direction4(map,z,d,work_a,position)
+    return direction4(map,z,d,work_a,position)
+  }
+}
 
 //-------------------------------------
 
@@ -90,7 +92,7 @@ fn direction1(map,z,d,work_a,position){
     //info(`it moves ${result}`);
     return result
   }
-  return direction(map,z,d+1,work_a,position)
+  return direction1(map,z,d+1,work_a,position)
 }
 
 //---------------------------------------------
@@ -150,7 +152,7 @@ fn direction2(map,z,d,work_a,position){
     //info(`it moves ${result}`);
     return result
   }
-  return direction(map,z,d+1,work_a,position)
+  return direction2(map,z,d+1,work_a,position)
 }
 
 //----------------------------------------------------
@@ -210,7 +212,7 @@ fn direction3(map,z,d,work_a,position){
     //info(`it moves ${result}`);
     return result
   }
-  return direction(map,z,d+1,work_a,position)
+  return direction3(map,z,d+1,work_a,position)
 }
 
 //---------------------------------------------
@@ -270,7 +272,7 @@ fn direction4(map,z,d,work_a,position){
     //info(`it moves ${result}`);
     return result
   }
-  return direction(map,z,d+1,work_a,position)
+  return direction4(map,z,d+1,work_a,position)
 }
 
 //-------------------------------------------------------------------
