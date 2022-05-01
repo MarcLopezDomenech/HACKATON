@@ -137,7 +137,7 @@ fn direction(map,w,d,work_a,M,resultat_c,dist_c){
     dist=d;
     if should_move(map,x+d-i,y+i,our_color,work_a,M) {
       if map[x+d-i][y+i] == Tile::EMPTY {
-        result=2;
+        result=2; 
       }else{
         //info(`it moves ${2}`);
         resultat_p=2;
@@ -183,16 +183,16 @@ fn direction(map,w,d,work_a,M,resultat_c,dist_c){
     //info(`it moves ${1}`);
     if map[x][y-d] == Tile::EMPTY {
       result=1;
-    }
+    } 
     else{
       resultat_p=1;
     }
   }
-  if resultat_p<4 && dist+1<dist_c{
+  if resultat_p<4 && dist+4<dist_c{
     //info(`it moves ${result}`);
     return resultat_p
   }
-  if result<4 && dist+2<dist_c{
+  if result<4 && dist+5<dist_c{
     //info(`it moves ${result}`);
     return result
   }
@@ -240,7 +240,7 @@ let M=new_mat(40,40);
 //let P=puntuacio(map);
 //let m_punt;
 let color=map.my_color;
-/*
+/* 
 if(color==Tile::GREEN){
   m_punt=P[0];
 }
