@@ -312,78 +312,91 @@ max=2
 for i=0..8{
   for j=i+1..8{
   a=solapan(i,j, 2
-  if(solapan(i,j, 2)==0){}
+  if(solapan(i,j, 2)==0 || max<=0){}
       if RESULTS[i][0]==0 {
-        info(`worker ${w} moves to [${worker(w).x},${worker(w).y+1}]`);
-        M[worker(w).x][worker(w).y+1]=1;
-        worker(w).move_up();
+        info(`worker ${i} moves to [${worker(i).x},${worker(i).y+1}]`);
+        M[worker(i).x][worker(i).y+1]=1;
+        worker(i).move_up();
       }
       else if RESULTS[i][0]==1 {
-        info(`worker ${w} moves to [${worker(w).x},${worker(w).y-1}]`);
+        info(`worker ${i} moves to [${worker(i).x},${worker(i).y-1}]`);
         M[worker(w).x][worker(w).y-1]=1;
         worker(w).move_down();
       }
       else if RESULTS[i][0]==2 {
+        info(`worker ${i} moves to [${worker(i).x+1},${worker(i).y}]`);
+        M[worker(i).x+1][worker(i).y]=1;
+        worker(i).move_right();
+      }
+      else if RESULTS[i][0]==3 {
+        info(`worker ${i} moves to [${worker(i).x-1},${worker(i).y}]`);
+        M[worker(i).x-1][worker(i).y]=1;
+        worker(i).move_left();
+
+        else if RESULTS[j][0]==1 {
+          info(`worker ${j} moves to [${worker(j).x},${worker(j).y-1}]`);
+          M[worker(j).x][worker(j).y-1]=1;
+          worker(j).move_down();
+        }
+        else if RESULTS[j][0]==2 {
+          info(`worker ${j} moves to [${worker(j).x+1},${worker(w).y}]`);
+          M[worker(j).x+1][worker(j).y]=1;
+          worker(j).move_right();
+        }
+        else if RESULTS[j][0]==3 {
+          info(`worker ${j} moves to [${worker(j).x-1},${worker(j).y}]`);
+          M[worker(j).x-1][worker(j).y]=1;
+          worker(j).move_left();
+      } else {
+      if(max>0){
+      if(a>b) eficaz=j;
+      else eficaz=i;
+      if RESULTS[eficaz][0]==0 {
+        info(`worker ${w} moves to [${worker(w).x},${worker(w).y+1}]`);
+        M[worker(w).x][worker(w).y+1]=1;
+        worker(w).move_up();
+      }
+      else if RESULTS[eficaz][0]==1 {
+        info(`worker ${w} moves to [${worker(w).x},${worker(w).y-1}]`);
+        M[worker(w).x][worker(w).y-1]=1;
+        worker(w).move_down();
+      }
+      else if RESULTS[eficaz][0]==2 {
         info(`worker ${w} moves to [${worker(w).x+1},${worker(w).y}]`);
         M[worker(w).x+1][worker(w).y]=1;
         worker(w).move_right();
       }
-      else if RESULTS[i][0]==3 {
+      else if RESULTS[eficaz][0]==3 {
         info(`worker ${w} moves to [${worker(w).x-1},${worker(w).y}]`);
         M[worker(w).x-1][worker(w).y]=1;
         worker(w).move_left();
-
-        else if RESULTS[j][0]==1 {
-          info(`worker ${w} moves to [${worker(w).x},${worker(w).y-1}]`);
-          M[worker(w).x][worker(w).y-1]=1;
-          worker(w).move_down();
-        }
-        else if RESULTS[j][0]==2 {
-          info(`worker ${w} moves to [${worker(w).x+1},${worker(w).y}]`);
-          M[worker(w).x+1][worker(w).y]=1;
-          worker(w).move_right();
-        }
-        else if RESULTS[j][0]==3 {
-          info(`worker ${w} moves to [${worker(w).x-1},${worker(w).y}]`);
-          M[worker(w).x-1][worker(w).y]=1;
-          worker(w).move_left();
-      } else {
-      if()
+      }
+      if(i==eficaz){
+      ineficaz=j;}
+      else{
+      ineficaz=i;
+      }
+      M[map.worker(ineficaz).x][map.worker(ineficaz).y]=1
+      2plato=RESULTS[w]=direction(map,w,d,work_a,M,resultat_c,dist_c);}
+      if 2plato[0]==0 {
+        info(`worker ${ineficaz} moves to [${worker(ineficaz).x},${worker(ineficaz).y+1}]`);
+        M[worker(ineficaz).x][worker(ineficaz).y+1]=1;
+        worker(ineficaz).move_up();
+      }
+      else if 2plato[0]==1 {
+        info(`worker ${ineficaz} moves to [${worker(ineficaz).x},${worker(ineficaz).y-1}]`);
+        M[worker(ineficaz).x][worker(ineficaz).y-1]=1;
+        worker(ineficaz).move_down();
+      }
+      else if 2plato[0]==2 {
+        info(`worker ${ineficaz} moves to [${worker(w).x+1},${worker(w).y}]`);
+        M[worker(ineficaz).x+1][worker(ineficaz).y]=1;
+        worker(ineficaz).move_right();
+      }
+      else if 2plato[0]==3 {
+        info(`worker ${ineficaz} moves to [${worker(ineficaz).x-1},${worker(ineficaz).y}]`);
+        M[worker(ineficaz).x-1][worker(ineficaz).y]=1;
+        worker(ineficaz).move_left();
       }
   }
-  }
 }
-
-
-
-
-
-
-
-
-
-
-
-    if dir[0]==0 {
-      info(`worker ${w} moves to [${worker(w).x},${worker(w).y+1}]`);
-      M[worker(w).x][worker(w).y+1]=1;
-      worker(w).move_up();
-    }
-    else if dir[0]==1 {
-      info(`worker ${w} moves to [${worker(w).x},${worker(w).y-1}]`);
-      M[worker(w).x][worker(w).y-1]=1;
-      worker(w).move_down();
-    }
-    else if dir[0]==2 {
-      info(`worker ${w} moves to [${worker(w).x+1},${worker(w).y}]`);
-      M[worker(w).x+1][worker(w).y]=1;
-      worker(w).move_right();
-    }
-    else if dir[0]==3 {
-      info(`worker ${w} moves to [${worker(w).x-1},${worker(w).y}]`);
-      M[worker(w).x-1][worker(w).y]=1;
-      worker(w).move_left();
-    } else {
-    info(`${w} fails `);
-    }
-  }
