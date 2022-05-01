@@ -175,11 +175,24 @@ Obj[w][1]=direction_OBJ(map,w,1,map.workers,M)[2];
 return Obj
 }
 
-//dada pareja i, j dice si solapan trabajo (dist(obji, objj)<eps)
+//dada pareja i, j dice si solapan trabajo (dist(obji, objj)<eps), si solapan pone
+//0, no solapan
+//1 solapan y el más cercano es j
+//-1 solapan y el más cercano es i
 sobran(i, j, eps, Obj){
-d2=(Obj[i][0]-Obj[j][0])*(Obj[i][0]-Obj[j][0])+(Obj[i][1]-Obj[j][1])*(Obj[i][1]-Obj[j][1]))
-return d2<eps*eps;
+d=(Obj[i][0]-Obj[j][0])*(Obj[i][0]-Obj[j][0])+(Obj[i][1]-Obj[j][1])*(Obj[i][1]-Obj[j][1]))
+solapan= d2<eps*eps;
+ij=(Obj[i][0]-Obj[j][0])*(Obj[i][0]-Obj[j][0])-(Obj[i][1]-Obj[j][1])*(Obj[i][1]-Obj[j][1]))
+if (ij>0){
+ij=1
 }
+else{
+ij=-1
+}
+return ij*solapan;
+}
+
+// extender a más de dos y en función de distancia
 
 }
 
