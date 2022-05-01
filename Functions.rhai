@@ -96,4 +96,92 @@ fn can_move(x,y){
   }
   true
 }
+
+fn direction_OBJ(map,w,d,work_a,M){
+result=[0,0,0] //=[ins, xobj, yobj]
+  if d>40{
+    info(`function fails`);
+    return [1, 0, 0]
+  }
+
+  let our_color=w.color;
+  let result[0]=4;
+  let x=w.x;
+  let y=w.y;
+  for i in 0..d{
+    //Primer quadrant
+    if should_move(map,x+d-i,y+i,our_color,work_a,M) {
+      if map[x+d-i][y+i] == Tile::EMPTY {
+      result=[2, x+d-i, y+i]
+      } else {
+        //info(`it moves ${2}`);
+        return result
+      }
+    }
+    //Quart quadrant
+    if should_move(map,x+d-i,y-i,our_color,work_a,M) {
+      if map[x+d-i][y-i] == Tile::EMPTY {
+        result=[2, x+d-i, y-i]
+      } else {
+        //info(`it moves ${2}`);
+        return result
+      }
+    }
+    //Segon quadrant
+    if should_move(map,x-d+i,y+i,our_color,work_a,M) {
+      if map[x-d+i][y+i] == Tile::EMPTY {
+        result=[2, x-d+i, y+i]
+      } else {
+        //info(`it moves ${3}`);
+        return result
+      }
+    }
+    //Tercer quadrant
+    if should_move(map,x-d+i,y-i,our_color,work_a,M){
+      if map[x-d+i][y-i] == Tile::EMPTY {
+        result=[3, x-d+i, y-i]
+      } else {
+        //info(`it moves ${3}`);
+        return result
+      }
+    }
+  }
+  if should_move(map,x,y+d,our_color,work_a,M) {
+    if map[x][y+d] == Tile::EMPTY {
+      result =[0, x, y+d];
+    } else {
+      //info(`it moves ${0}`);
+      return result
+    }
+  }
+  if should_move(map,x,y-d,our_color,work_a,M) {
+    //info(`it moves ${1}`);
+    return [1, x, y-d]
+  }
+  if result[0]<4{
+    //info(`it moves ${result}`);
+    return result
+  }
+  direction(map,w,d+1,work_a,M)
+}
+
+//nx8x2, suponiendo se hace caso a direccion
+fn anticipa (n, map.workers, M, map){
+Obj=new_mat(8,2)
+for w=0..8{
+Obj[w][0]=direction_OBJ(map,w,1,map.workers,M)[1];
+Obj[w][1]=direction_OBJ(map,w,1,map.workers,M)[2];
+}
+return Obj
+}
+
+//dada pareja i, j dice si solapan trabajo (dist(obji, objj)<eps)
+sobran(i, j, eps, Obj){
+d2=(Obj[i][0]-Obj[j][0])*(Obj[i][0]-Obj[j][0])+(Obj[i][1]-Obj[j][1])*(Obj[i][1]-Obj[j][1]))
+return d2<eps*eps;
+}
+
+}
+
+
 */
