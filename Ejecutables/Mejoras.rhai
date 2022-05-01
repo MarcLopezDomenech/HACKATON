@@ -110,27 +110,37 @@ fn should_move(map,x,y,our_color,work_ar,M){
   }
   return false
 }
+//Retorna si la casella (x,y) es troba dins del mapa i no esta pintada del nostre color.
+fn con_move(map,x,y,our_color,work_ar,M,C,i,j){
+  if(valid_pos(x,y)){
+    return C[x][y] != C[i][j] && can_move(x,y,work_ar,M)
+  }
+  return false
+}
 
 //donada una distancia d i un worker w, calcula el punt a distancia d que no sigui del nostre color,
 //prioritzant si és d'un altre color. Retorna un enter entre 0 i 3 que significa:
 //[0,1,2,3]=[up,down,right,left]
-fn direction(map,w,d,work_a,M){
+fn direction(map,w,d,work_a,M,resultat_c,dist_c){
   if d>40{
     info(`function fails`);
     return 1
   }
   let our_color=w.color;
   let result=4;
+  let resultat_p=4;
   let x=w.x;
   let y=w.y;
+  let dist;
   for i in 0..d{
     //Primer quadrant
+    dist=d;
     if should_move(map,x+d-i,y+i,our_color,work_a,M) {
       if map[x+d-i][y+i] == Tile::EMPTY {
-        result=2;
-      } else {
+        result=2; 
+      }else{
         //info(`it moves ${2}`);
-        return 2
+        resultat_p=2;
       }
     }
     //Quart quadrant
@@ -139,7 +149,7 @@ fn direction(map,w,d,work_a,M){
         result=2;
       } else {
         //info(`it moves ${2}`);
-        return 2
+        resultat_p=2;
       }
     }
     //Segon quadrant
@@ -148,7 +158,7 @@ fn direction(map,w,d,work_a,M){
         result=3;
       } else {
         //info(`it moves ${3}`);
-        return 3
+        resultat_p=3;
       }
     }
     //Tercer quadrant
@@ -157,7 +167,7 @@ fn direction(map,w,d,work_a,M){
         result=3;
       } else {
         //info(`it moves ${3}`);
-        return 3
+        resultat_p=3;
       }
     }
   }
@@ -166,20 +176,66 @@ fn direction(map,w,d,work_a,M){
       result=0;
     } else {
       //info(`it moves ${0}`);
-      return 0
+      resultat_p=0;
     }
   }
   if should_move(map,x,y-d,our_color,work_a,M) {
     //info(`it moves ${1}`);
-    return 1
+    if map[x][y-d] == Tile::EMPTY {
+      result=1;
+    } 
+    else{
+      resultat_p=1;
+    }
   }
-  if result<4{
+  if resultat_p<4 && dist+1<dist_c{
+    //info(`it moves ${result}`);
+    return resultat_p
+  }
+  if result<4 && dist+2<dist_c{
     //info(`it moves ${result}`);
     return result
   }
-  direction(map,w,d+1,work_a,M)
+  if dist > dist_c{
+    return resultat_c
+  }
+  direction(map,w,d+1,work_a,M,resultat_c,dist_c)
 }
-
+fn direc_c(map,w,d,work_a,M,C){
+  if d>40{
+    info(`function fails`);
+    return 1
+  }
+  let our_color=w.color;
+  let x=w.x;
+  let y=w.y;
+  for i in 0..d{
+    //Primer quadrant
+    if con_move(map,x+d-i,y+i,our_color,work_a,M,C,x,y) {
+      return [2,d]
+    }
+    //Quart quadrant
+    if con_move(map,x+d-i,y-i,our_color,work_a,M,C,x,y) {
+      return [2,d]
+    }
+    //Segon quadrant
+    if con_move(map,x-d+i,y+i,our_color,work_a,M,C,x,y) {
+      return [3,d]
+    }
+    //Tercer quadrant
+    if con_move(map,x-d+i,y-i,our_color,work_a,M,C,x,y){
+      return [3,d]
+    }
+  }
+  if con_move(map,x,y+d,our_color,work_a,M,C,x,y) {
+    return [0,d]
+  }
+  if con_move(map,x,y-d,our_color,work_a,M,C,x,y) {
+    //info(`it moves ${1}`);
+    return [1,d]
+  }
+  direc_c(map,w,d+1,work_a,M,C)
+}
 let M=new_mat(40,40);
 //let P=puntuacio(map);
 //let m_punt;
@@ -205,7 +261,10 @@ info(`Num. de comp conexas ${num_con} `);
 for w in 0..8 {
 // color=worker(w).our_color;
   let work_ar=map.workers;
-  let dir=direction(map,worker(w),1,work_ar,M);
+  let C=direc_c(map,worker(w),1,work_ar,M,C);
+  let resultat_c=C[0];
+  let dist_c=C[1];
+  let dir=direction(map,worker(w),1,work_ar,M,resultat_c,dist_c);
     if dir==0 {
       info(`worker ${w} moves to [${worker(w).x},${worker(w).y+1}]`);
       M[worker(w).x][worker(w).y+1]=1;
