@@ -215,7 +215,7 @@ fn direction3(map,z,d,work_a,position){
   return direction3(map,z,d+1,work_a,position)
 }
 
-//---------------------------------------------
+//-------------------------------------------------------
 
 fn direction4(map,z,d,work_a,position){
   if d==40{
@@ -277,11 +277,6 @@ fn direction4(map,z,d,work_a,position){
 
 //-------------------------------------------------------------------
 
-if "tick" in memory == false {
-        memory.tick = 0;
-} else {
-        memory.tick += 1;
-}
 if "init" in memory == false {
         let x=worker(0).x;
         let y=worker(0).y;
@@ -304,7 +299,7 @@ if "init" in memory == false {
 
 let position=[];
 position.pad(8,0);
-for w in 0..8 {
+fn main(w) {
   let init=memory.init;
   let work_ar=map.workers;
   let dir=direction(map,w,1,work_ar,position,init);
@@ -330,4 +325,70 @@ for w in 0..8 {
     } else {
     info(`${w} fails `);
     }
+}
+
+//-------------------------------------------------------------------
+
+if "tick" in memory == false {
+        memory.tick = 0;
+} else {
+        memory.tick += 1;
+}
+
+if memory.tick < 30{
+for w in 1..6{
+main(w);
+}
+for w in 6..8{
+  if memory.init == 1{
+    worker(w).move_down();
+  }
+  if memory.init == 2{
+    worker(w).move_right();
+  }
+  if memory.init == 3{
+    worker(w).move_up();
+  }
+  if memory.init == 4{
+    worker(w).move_left();
+  }
+}
+} else if memory.tick < 60{
+for w in 1..4{
+main(w);
+}
+for w in 6..8{
+main(w);
+}
+for w in 4..6{
+  if memory.init == 1{
+    worker(w).move_down();
+  }
+  if memory.init == 2{
+    worker(w).move_right();
+  }
+  if memory.init == 3{
+    worker(w).move_up();
+  }
+  if memory.init == 4{
+    worker(w).move_left();
+  }
+}
+} else if memory.tick == 60{
+let mean_x=0.0;
+for w in map.workers{
+  mean_x+=w.x;
+}
+mean_x/=32;
+let mean_y=0.0;
+for w in map.workers{
+  mean_y+=w.y;
+}
+mean_y/=32;
+}
+
+//-----------------------------------------------------------------
+
+if memory.tick >=60 & memory.tick <= 100{
+
 }
