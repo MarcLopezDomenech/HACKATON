@@ -299,6 +299,40 @@ if "init" in memory == false {
 
 let position=[];
 position.pad(8,0);
+
+fn go_to(w,memory,position){
+  let x=memory.x;
+  let y=memory.y;
+  if (w%2).abs()==0 {
+  if x==34 && w<34 {
+  position[w]=40;
+  worker(w).move_right();
+  return
+  } if (x==6 && w>6){
+  position[w]=-40;
+  worker(w).move_left();
+  return
+}
+}
+if y==34 && w<34{
+  position[w]=1;
+  worker(w).move_up();
+  return
+} if y==6 && w>6{
+  position[w]=-1;
+  worker(w).move_down();
+  return
+} if x==34 && w<34{
+  position[w]=40;
+  worker(w).move_right();
+  return
+} if x==6 && w>6{
+  position[w]=-40;
+  worker(w).move_left();
+  return
+}
+}
+
 fn main(w, memory ,map, position) {
   let init=memory.init;
   let work_ar=map.workers;
@@ -334,26 +368,40 @@ if "tick" in memory == false {
 } else {
         memory.tick += 1;
 }
+if "x" in memory == false {
+        memory.x = 0;
+} else {
+        memory.x += 0;
+}
+if "y" in memory == false {
+        memory.y = 0;
+} else {
+        memory.y += 0;
 
-if memory.tick < 30{
+if memory.tick < 20{
 for w in 1..6{
 main(w, memory, map, position);
 }
 for w in 6..8{
   if memory.init == 1{
+    position[w]=-1;
     worker(w).move_down();
   }
-  if memory.init == 2{
+  else if memory.init == 2{
+    position[w]=40;
     worker(w).move_right();
   }
-  if memory.init == 3{
+  else if memory.init == 3{
+    position[w]=1;
     worker(w).move_up();
   }
-  if memory.init == 4{
+  else if memory.init == 4{
+    position[w]=40;
     worker(w).move_left();
-  }
+  } else {
+  info(`Error`);}
 }
-} else if memory < 60{
+} else if memory < 50{
 for w in 1..4{
 main(w, memory, map, position);
 }
@@ -362,19 +410,23 @@ main(w, memory, map, position);
 }
 for w in 4..6{
   if memory.init == 1{
+    position[w]=-1;
     worker(w).move_down();
   }
   if memory.init == 2{
+    position[w]=40;
     worker(w).move_right();
   }
   if memory.init == 3{
+    position[w]=1;
     worker(w).move_up();
   }
   if memory.init == 4{
+    position[w]=-40;
     worker(w).move_left();
   }
 }
-} else if memory.tick == 60{
+} else if memory.tick == 50{
 let mean_x=0.0;
 for w in map.workers{
   mean_x+=w.x;
@@ -385,10 +437,97 @@ for w in map.workers{
   mean_y+=w.y;
 }
 mean_y/=32;
+if mean_x < 20 {
+  memory.x=34;
+  } else {memory.x=6}
+if mean_y < 20 {
+  memory.y =34
+  } else {
+  memory.y=6}
 }
 
 //-----------------------------------------------------------------
 
-if memory.tick >=60 & memory.tick <= 900{
-main(w, memory, map, position);
+if memory.tick >=50 & memory.tick <= 80{
+  for w in 0..4{
+    go_to(w,memory,position);
+  }
+  for w in 4..8{
+    main(w, memory, map, position);
+  }
+}
+if memory.tick >80 & memory.tick <= 220{
+  for w in 0..8{
+  main(w, memory, map, position);
+  }
+let mean_x=0.0;
+let mean_y=0.0;
+if memory.tick == 220{
+for w in map.workers{
+  mean_x+=w.x;
+}
+mean_x=mean_x/32;
+for w in map.workers{
+  mean_y+=w.y;
+}
+mean_y/=32;
+}
+if mean_x < 20 {
+  memory.x=34;
+  } else {
+  memory.x=6
+  }
+if mean_y < 20 {
+  memory.y =34
+  } else {
+  memory.y=6}
+}
+if memory.tick >220 & memory.tick <= 250{
+  for w in 4..8{
+    go_to(w,memory, position);
+  }
+  for w in 1..4{
+    main(w, memory, map, position);
+  }
+}
+}
+
+if memory.tick >250 & memory.tick <= 470{
+  for w in 0..8{
+  main(w, memory, map, position);
+  }
+}
+if "Direction" in memory == false {
+        memory.Direction = [0,0,0,0,0,0,0,0];
+}
+if memory.tick == 470{
+  for w in 0..8{
+  if w<4 && worker(w).x<20{
+  memory.Direction[w]=1;
+  }
+  if w>=4 && worker(w).y<20{
+  memory.Direction[w]=1;
+  }
+  }
+}
+
+if memory.tick>470{
+  for w in 0..4{
+  if memory.Direction[w]==1{
+  position[w]=40;
+  worker(w).move_right();
+  } else{
+  position[w]=-40;
+  worker(w).move_left();
+  }
+  }
+  for w in 4..8{
+  if memory.Direction[w]==1{
+  position[w]=1;
+  worker(w).move_up();
+  } else{
+  position[w]=-1;
+  worker(w).move_down();
+  }
+  }
 }
