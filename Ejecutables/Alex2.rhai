@@ -299,7 +299,7 @@ if "init" in memory == false {
 
 let position=[];
 position.pad(8,0);
-fn main(w) {
+fn main(w, memory ,map, position) {
   let init=memory.init;
   let work_ar=map.workers;
   let dir=direction(map,w,1,work_ar,position,init);
@@ -337,7 +337,7 @@ if "tick" in memory == false {
 
 if memory.tick < 30{
 for w in 1..6{
-main(w);
+main(w, memory, map, position);
 }
 for w in 6..8{
   if memory.init == 1{
@@ -353,12 +353,12 @@ for w in 6..8{
     worker(w).move_left();
   }
 }
-} else if memory.tick < 60{
+} else if memory < 60{
 for w in 1..4{
-main(w);
+main(w, memory, map, position);
 }
 for w in 6..8{
-main(w);
+main(w, memory, map, position);
 }
 for w in 4..6{
   if memory.init == 1{
@@ -389,6 +389,6 @@ mean_y/=32;
 
 //-----------------------------------------------------------------
 
-if memory.tick >=60 & memory.tick <= 100{
-
+if memory.tick >=60 & memory.tick <= 900{
+main(w, memory, map, position);
 }
