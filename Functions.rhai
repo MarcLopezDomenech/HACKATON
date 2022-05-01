@@ -175,7 +175,7 @@ Obj[w][1]=direction_OBJ(map,w,1,map.workers,M)[2];
 return Obj
 }
 
-//dada pareja i, j dice si solapan trabajo (dist(obji, objj)<eps), si solapan pone
+//dada pareja i, j dice si solapan trabajo (dist(obji, objj)<eps), si solapan + cerca
 //0, no solapan
 //1 solapan y el más cercano es j
 //-1 solapan y el más cercano es i
@@ -191,7 +191,7 @@ ij=-1
 }
 return ij*solapan;
 }
-
+// que hacer con ignorado
 // extender a más de dos y en función de distancia
 
 }
