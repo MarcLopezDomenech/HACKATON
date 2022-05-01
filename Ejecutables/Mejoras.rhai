@@ -28,6 +28,7 @@ fn new_mat(x, y) {
 
   matrix
 }
+let C=new_mat(40,40);
 /*
 fn puntuacio(map){
   let Puntuacio=[0,0,0,0];
@@ -51,24 +52,39 @@ fn puntuacio(map){
 }
 */
 fn con_rec(C,map,color,i,j){
-  if(C[i][j]!=0){
-    if(valid_pos(i-1,j) && map[i-1][j]==color && C[i-1][j]==0){
-      C[i-1][j]=C[i][j];
-      con_rec(C,map,color,i-1,j);
+  let stac=[];
+  stac.push(i);
+  stac.push(j);
+  let a=0;
+  let y=0;
+  let u=C[i][j];
+  while(stac.len!=0){
+    y=stac.pop();
+    a=stac.pop();
+    info(`${a}, ${y}`);
+
+    if(valid_pos(-1+a,y) && map[-1+a][y]==color && C[-1+a][y]==0){
+      C[a-1][y]=u;
+      stac.push(-1+a);
+      stac.push(y);
     }
-    if(valid_pos(i+1,j) && map[i+1][j]==color && C[i+1][j]==0){
-      C[i+1][j]=C[i][j];
-      con_rec(C,map,color,i+1,j);
+    if(valid_pos(a+1,y) && map[a+1][y]==color && C[a+1][y]==0){
+      C[a+1][y]=u;
+      stac.push(a+1);
+      stac.push(y);
     }
-    if(valid_pos(i,j-1) && map[i][j-1]==color && C[i][j-1]==0){
-      C[i][j-1]=C[i][j];
-      con_rec(C,map,color,i,j-1);
+    if(valid_pos(a,y-1) && map[a][y-1]==color && C[a][y-1]==0){
+      C[a][y-1]=u;
+      stac.push(a);
+      stac.push(y-1);
     }
-    if(valid_pos(i,j+1) && map[i][j+1]==color && C[i][j+1]==0){
-      C[i][j+1]=C[i][j];
-      con_rec(C,map,color,i,j+1);
+    if(valid_pos(a,y+1) && map[a][y+1]==color && C[a][y+1]==0){
+      C[a][y+1]=u;
+      stac.push(a);
+      stac.push(y+1);
     }
   }
+  return C;
 }
 //Retorna la matriu components conexes
 fn conexes(C,map,color){
@@ -77,13 +93,14 @@ fn conexes(C,map,color){
   for j in 0..40{
     for i in 0..40{
       if(map[i][j]==color && C[i][j]==0){
+        info(`Entrada ${i}, ${j}`);
           cont=cont+1;
           C[i][j]=cont;
-          con_rec(C,map,color,i,j);
+          C=con_rec(C,map,color,i,j);
       }
     }
   }
-  return cont;
+  return [cont,C];
 }
 
 //Retorna si la casella (x,y) es troba dins del mapa i no esta pintada del nostre color.
@@ -164,7 +181,6 @@ fn direction(map,w,d,work_a,M){
 }
 
 let M=new_mat(40,40);
-let C=new_mat(40,40);
 //let P=puntuacio(map);
 //let m_punt;
 let color=map.my_color;
@@ -182,7 +198,9 @@ else if(Tile::BLUE){
   m_punt=P[3];
 */
 
-let num_con=conexes(C,map,color);
+let R=conexes(C,map,color);
+let num_con=R[0];
+C=R[1];
 info(`Num. de comp conexas ${num_con} `);
 for w in 0..8 {
 // color=worker(w).our_color;
