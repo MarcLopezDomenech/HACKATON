@@ -122,10 +122,12 @@ fn con_move(map,x,y,our_color,work_ar,M,C,i,j){
 //prioritzant si és d'un altre color. Retorna un enter entre 0 i 3 que significa:
 //[0,1,2,3]=[up,down,right,left]
 fn direction(map,w,d,work_a,M,resultat_c,dist_c){
+
   if d>40{
     info(`function fails`);
     return 1
   }
+  r=[0,0,0]
   let our_color=w.color;
   let result=4;
   let resultat_p=4;
@@ -137,7 +139,7 @@ fn direction(map,w,d,work_a,M,resultat_c,dist_c){
     dist=d;
     if should_move(map,x+d-i,y+i,our_color,work_a,M) {
       if map[x+d-i][y+i] == Tile::EMPTY {
-        result=2; 
+        result=2;
       }else{
         //info(`it moves ${2}`);
         resultat_p=2;
@@ -147,6 +149,8 @@ fn direction(map,w,d,work_a,M,resultat_c,dist_c){
     if should_move(map,x+d-i,y-i,our_color,work_a,M) {
       if map[x+d-i][y-i] == Tile::EMPTY {
         result=2;
+        r[1]=x+d-i
+        r[2]=y-i
       } else {
         //info(`it moves ${2}`);
         resultat_p=2;
@@ -155,6 +159,8 @@ fn direction(map,w,d,work_a,M,resultat_c,dist_c){
     //Segon quadrant
     if should_move(map,x-d+i,y+i,our_color,work_a,M) {
       if map[x-d+i][y+i] == Tile::EMPTY {
+      r[1]=x-d+i
+      r[2]=y+i
         result=3;
       } else {
         //info(`it moves ${3}`);
@@ -164,6 +170,8 @@ fn direction(map,w,d,work_a,M,resultat_c,dist_c){
     //Tercer quadrant
     if should_move(map,x-d+i,y-i,our_color,work_a,M){
       if map[x-d+i][y-i] == Tile::EMPTY {
+      r[1]=x-d+i
+      r[2]=y-i
         result=3;
       } else {
         //info(`it moves ${3}`);
@@ -173,6 +181,8 @@ fn direction(map,w,d,work_a,M,resultat_c,dist_c){
   }
   if should_move(map,x,y+d,our_color,work_a,M) {
     if map[x][y+d] == Tile::EMPTY {
+    r[1]=x
+    r[2]=y+d
       result=0;
     } else {
       //info(`it moves ${0}`);
@@ -182,23 +192,25 @@ fn direction(map,w,d,work_a,M,resultat_c,dist_c){
   if should_move(map,x,y-d,our_color,work_a,M) {
     //info(`it moves ${1}`);
     if map[x][y-d] == Tile::EMPTY {
+    r[1]=x
+    r[2]=y-d
       result=1;
-    } 
+    }
     else{
       resultat_p=1;
     }
   }
   if resultat_p<4 && dist+4<dist_c{
     //info(`it moves ${result}`);
-    return resultat_p
+    result= resultat_p
   }
-  if result<4 && dist+5<dist_c{
+  //if result<4 && dist+5<dist_c{
     //info(`it moves ${result}`);
-    return result
-  }
+    //return result}
   if dist > dist_c{
-    return resultat_c
+    result= resultat_c
   }
+  r[0]=result
   direction(map,w,d+1,work_a,M,resultat_c,dist_c)
 }
 fn direc_c(map,w,d,work_a,M,C){
@@ -240,7 +252,7 @@ let M=new_mat(40,40);
 //let P=puntuacio(map);
 //let m_punt;
 let color=map.my_color;
-/* 
+/*
 if(color==Tile::GREEN){
   m_punt=P[0];
 }
@@ -265,22 +277,109 @@ for w in 0..8 {
   let resultat_c=C[0];
   let dist_c=C[1];
   let dir=direction(map,worker(w),1,work_ar,M,resultat_c,dist_c);
-    if dir==0 {
+
+  fn anticipa (n, map.workers, M, map){
+  Obj=new_mat(8,2)
+  for w=0..8{
+  Obj[w][0]=direction_OBJ(map,w,1,map.workers,M)[1];
+  Obj[w][1]=direction_OBJ(map,w,1,map.workers,M)[2];
+  }
+  return Obj
+  }
+
+  //dada pareja i, j dice si solapan trabajo (dist(obji, objj)<eps), si solapan + cerca
+  //0, no solapan
+  //1 solapan y el más cercano es j
+  //-1 solapan y el más cercano es i
+  fn sobran(i, j, eps, map.workers, Obj){
+  d=(Obj[i][0]-Obj[j][0])*(Obj[i][0]-Obj[j][0])+(Obj[i][1]-Obj[j][1])*(Obj[i][1]-Obj[j][1]))
+  solapan= d2<eps*eps;
+  ij=abs(Obj[i][0]-map.workers(i).x)+abs(Obj[i][1]-map.workers(i).y)-(abs(Obj[j][0]-map.workers(j).x)+abs(Obj[j][1]-map.workers(j).y))
+  if (ij>0){
+  ij=1
+  }
+  else{
+  ij=-1
+  }
+  return ij*solapan;
+  }
+
+RESULTS=new_mat(8,3);
+for w=0..{
+RESULTS[w]=direction(map,w,d,work_a,M,resultat_c,dist_c);}
+
+max=2
+for i=0..8{
+  for j=i+1..8{
+  a=solapan(i,j, 2
+  if(solapan(i,j, 2)==0){}
+      if RESULTS[i][0]==0 {
+        info(`worker ${w} moves to [${worker(w).x},${worker(w).y+1}]`);
+        M[worker(w).x][worker(w).y+1]=1;
+        worker(w).move_up();
+      }
+      else if RESULTS[i][0]==1 {
+        info(`worker ${w} moves to [${worker(w).x},${worker(w).y-1}]`);
+        M[worker(w).x][worker(w).y-1]=1;
+        worker(w).move_down();
+      }
+      else if RESULTS[i][0]==2 {
+        info(`worker ${w} moves to [${worker(w).x+1},${worker(w).y}]`);
+        M[worker(w).x+1][worker(w).y]=1;
+        worker(w).move_right();
+      }
+      else if RESULTS[i][0]==3 {
+        info(`worker ${w} moves to [${worker(w).x-1},${worker(w).y}]`);
+        M[worker(w).x-1][worker(w).y]=1;
+        worker(w).move_left();
+
+        else if RESULTS[j][0]==1 {
+          info(`worker ${w} moves to [${worker(w).x},${worker(w).y-1}]`);
+          M[worker(w).x][worker(w).y-1]=1;
+          worker(w).move_down();
+        }
+        else if RESULTS[j][0]==2 {
+          info(`worker ${w} moves to [${worker(w).x+1},${worker(w).y}]`);
+          M[worker(w).x+1][worker(w).y]=1;
+          worker(w).move_right();
+        }
+        else if RESULTS[j][0]==3 {
+          info(`worker ${w} moves to [${worker(w).x-1},${worker(w).y}]`);
+          M[worker(w).x-1][worker(w).y]=1;
+          worker(w).move_left();
+      } else {
+      if()
+      }
+  }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+    if dir[0]==0 {
       info(`worker ${w} moves to [${worker(w).x},${worker(w).y+1}]`);
       M[worker(w).x][worker(w).y+1]=1;
       worker(w).move_up();
     }
-    else if dir==1 {
+    else if dir[0]==1 {
       info(`worker ${w} moves to [${worker(w).x},${worker(w).y-1}]`);
       M[worker(w).x][worker(w).y-1]=1;
       worker(w).move_down();
     }
-    else if dir==2 {
+    else if dir[0]==2 {
       info(`worker ${w} moves to [${worker(w).x+1},${worker(w).y}]`);
       M[worker(w).x+1][worker(w).y]=1;
       worker(w).move_right();
     }
-    else if dir==3 {
+    else if dir[0]==3 {
       info(`worker ${w} moves to [${worker(w).x-1},${worker(w).y}]`);
       M[worker(w).x-1][worker(w).y]=1;
       worker(w).move_left();
