@@ -165,7 +165,6 @@ result=[0,0,0] //=[ins, xobj, yobj]
   direction(map,w,d+1,work_a,M)
 }
 
-//nx8x2, suponiendo se hace caso a direccion
 fn anticipa (n, map.workers, M, map){
 Obj=new_mat(8,2)
 for w=0..8{
